@@ -1,9 +1,14 @@
-#ifndef AED_PROJ_2_GRAPH_H
-#define AED_PROJ_2_GRAPH_H
+/*
+ * Graph.h
+ */
+#ifndef GRAPH_H_
+#define GRAPH_H_
 
 #include <cstddef>
 #include <vector>
 #include <queue>
+#include <stack>
+#include <list>
 
 using namespace std;
 
@@ -20,6 +25,9 @@ class Vertex {
     vector<Edge<T> > adj;  // list of outgoing edges
     bool visited;          // auxiliary field
     bool processing;       // auxiliary field
+    int indegree;          // auxiliary field
+    int num;               // auxiliary field
+    int low;               // auxiliary field
 
     void addEdge(Vertex<T> *dest, double w);
     bool removeEdgeTo(Vertex<T> *d);
@@ -33,6 +41,19 @@ public:
     void setProcessing(bool p);
     const vector<Edge<T>> &getAdj() const;
     void setAdj(const vector<Edge<T>> &adj);
+
+    int getIndegree() const;
+
+    void setIndegree(int indegree);
+
+    int getNum() const;
+
+    void setNum(int num);
+
+    int getLow() const;
+
+    void setLow(int low);
+
     friend class Graph<T>;
 };
 
@@ -52,7 +73,11 @@ public:
 
 template <class T>
 class Graph {
-    vector<Vertex<T> *> vertexSet;    // vertex set
+    vector<Vertex<T> *> vertexSet;      // vertex set
+    int _index_;                        // auxiliary field
+    stack<Vertex<T>> _stack_;           // auxiliary field
+    list<list<T>> _list_sccs_;        // auxiliary field
+
     void dfsVisit(Vertex<T> *v,  vector<T> & res) const;
     bool dfsIsDAG(Vertex<T> *v) const;
 public:
@@ -66,6 +91,8 @@ public:
     vector<T> dfs() const;
     vector<T> dfs(const T & source) const;
     vector<T> bfs(const T &source) const;
+    vector<T> topsort() const;
+    bool isDAG() const;
 };
 
 /****************** Provided constructors and functions ********************/
@@ -141,6 +168,36 @@ Vertex<T> * Graph<T>::findVertex(const T &in) const {
 template <class T>
 bool Vertex<T>::isVisited() const {
     return visited;
+}
+
+template<class T>
+int Vertex<T>::getIndegree() const {
+    return indegree;
+}
+
+template<class T>
+void Vertex<T>::setIndegree(int indegree) {
+    Vertex::indegree = indegree;
+}
+
+template<class T>
+int Vertex<T>::getNum() const {
+    return num;
+}
+
+template<class T>
+void Vertex<T>::setNum(int num) {
+    Vertex::num = num;
+}
+
+template<class T>
+int Vertex<T>::getLow() const {
+    return low;
+}
+
+template<class T>
+void Vertex<T>::setLow(int low) {
+    Vertex::low = low;
 }
 
 template <class T>
@@ -245,53 +302,87 @@ bool Graph<T>::removeVertex(const T &in) {
     return false;
 }
 
+
+/****************** DFS ********************/
+/*
+ * Performs a depth-first search (dfs) traversal in a graph (this).
+ * Returns a vector with the contents of the vertices by dfs order.
+ * Follows the algorithm described in theoretical classes.
+ */
 template <class T>
 vector<T> Graph<T>::dfs() const {
-    for(auto i :vertexSet) i->setVisited(false);
     vector<T> res;
-    for (auto j: vertexSet) {
-        if(!j->isVisited()) {
-            dfsVisit(j, res);
-        }
-    }
+    for (auto v : vertexSet)
+        v->visited = false;
+    for (auto v : vertexSet)
+        if (! v->visited)
+            dfsVisit(v, res);
     return res;
 }
 
+/*
+ * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
+ * Updates a parameter with the list of visited node contents.
+ */
 template <class T>
 void Graph<T>::dfsVisit(Vertex<T> *v, vector<T> & res) const {
-    res.push_back(v->getInfo());
-    v->setVisited(true);
-    for (int i = 0; i<v->getAdj().size(); i++ ){
-        if(!v->getAdj()[i].getDest()->isVisited()){
-            dfsVisit(v->getAdj()[i].getDest(), res);
-        }
+    v->visited = true;
+    res.push_back(v->info);
+    for (auto & e : v->adj) {
+        auto w = e.dest;
+        if ( ! w->visited)
+            dfsVisit(w, res);
     }
 }
 
-// TODO
+
+/****************** DFS ********************/
+/*
+ * Performs a depth-first search (dfs) in a graph (this).
+ * Returns a vector with the contents of the vertices by dfs order,
+ * from the source node.
+ */
 template <class T>
 vector<T> Graph<T>::dfs(const T & source) const {
     vector<T> res;
+    auto s = findVertex(source);
+    if (s == nullptr)
+        return res;
+
+    for (auto v : vertexSet)
+        v->visited = false;
+
+    dfsVisit(s, res);
     return res;
 }
 
 
+/****************** BFS ********************/
+/*
+ * Performs a breadth-first search (bfs) in a graph (this), starting
+ * from the vertex with the given source contents (source).
+ * Returns a vector with the contents of the vertices by bfs order.
+ */
 template <class T>
 vector<T> Graph<T>::bfs(const T & source) const {
-    for(auto i :vertexSet) i->setVisited(false);
     vector<T> res;
     auto s = findVertex(source);
-    queue<Vertex<T>*> q;
+    if (s == NULL)
+        return res;
+    queue<Vertex<T> *> q;
+    for (auto v : vertexSet)
+        v->visited = false;
     q.push(s);
-    s->visited=true;
-    while(!q.empty()){
-        s=q.front();
+    s->visited = true;
+    while (!q.empty()) {
+        auto v = q.front();
         q.pop();
-        res.push_back(s->info);
-        for(auto e : s->adj){
-            if(!e.getDest()->isVisited()){
-                q.push(e.getDest());
-                e.getDest()->setVisited(true);
+        res.push_back(v->info);
+        for (auto & e : v->adj) {
+            auto w = e.dest;
+            if ( ! w->visited ) {
+                q.push(w);
+                w->visited = true;
             }
         }
     }
@@ -299,4 +390,98 @@ vector<T> Graph<T>::bfs(const T & source) const {
 }
 
 
-#endif //AED_PROJ_2_GRAPH_H
+/****************** isDAG  ********************/
+/*
+ * Performs a depth-first search in a graph (this), to determine if the graph
+ * is acyclic (acyclic directed graph or DAG).
+ * During the search, a cycle is found if an edge connects to a vertex
+ * that is being processed in the stack of recursive calls (see theoretical classes).
+ * Returns true if the graph is acyclic, and false otherwise.
+ */
+
+template <class T>
+bool Graph<T>::isDAG() const {
+    for (auto v : vertexSet) {
+        v->visited = false;
+        v->processing = false;
+    }
+    for (auto v : vertexSet)
+        if (! v->visited)
+            if ( ! dfsIsDAG(v) )
+                return false;
+    return true;
+}
+
+/**
+ * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
+ * Returns false (not acyclic) if an edge to a vertex in the stack is found.
+ */
+template <class T>
+bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
+    v->visited = true;
+    v->processing = true;
+    for (auto & e : v->adj) {
+        auto w = e.dest;
+        if (w->processing)
+            return false;
+        if (! w->visited)
+            if (! dfsIsDAG(w))
+                return false;
+    }
+    v->processing = false;
+    return true;
+}
+
+
+/****************** toposort ********************/
+//=============================================================================
+// Exercise 1: Topological Sorting
+//=============================================================================
+// TODO
+/*
+ * Performs a topological sorting of the vertices of a graph (this).
+ * Returns a vector with the contents of the vertices by topological order.
+ * If the graph has cycles, returns an empty vector.
+ * Follows the algorithm described in theoretical classes.
+ */
+
+template<class T>
+vector<T> Graph<T>::topsort() const {
+    vector<T> res;
+    //Initialize for each test
+    for (auto i : vertexSet){
+        i->indegree = 0;
+        i->visited = false;
+    }
+
+    //Assign indegrees for all vertexs
+    for (auto i : vertexSet){
+        for (auto j: i->adj){
+            j.dest->indegree++;
+        }
+    }
+
+    //Initialize queue with first nodes
+    queue<Vertex<T> *> q;
+    for (auto i : vertexSet){
+        if (i->indegree == 0){
+            q.push(i);
+        }
+    }
+
+    //Append nodes to List
+    while(!q.empty()){
+        auto v = q.front();
+        q.pop();
+        for (auto j: v->adj){
+            j.dest->indegree--;
+            if (j.dest->indegree == 0){
+                q.push(j.dest);
+            }
+        }
+        res.push_back(v->info);
+    }
+    return res;
+}
+
+#endif /* GRAPH_H_ */
