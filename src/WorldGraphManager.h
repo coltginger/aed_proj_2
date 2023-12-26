@@ -16,7 +16,7 @@ private:
 
 public:
     WorldGraphManager();
-    
+
     void makeAirports();
     void makeAirlines();
     void makeFlights();
