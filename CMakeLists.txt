@@ -18,6 +18,6 @@ add_executable(aed_proj_2
         src/Flight.cpp
         src/FileManager.h
         src/FileManager.cpp
-        src/WorldGraph.h
-        src/WorldGraph.cpp
+        src/WorldGraphManager.h
+        src/WorldGraphManager.cpp
         main.cpp)

@@ -1,11 +1,11 @@
-#include "WorldGraph.h"
+#include "WorldGraphManager.h"
 
 #ifndef AED_PROJ_2_APP_H
 #define AED_PROJ_2_APP_H
 
 class App {
 private:
-    WorldGraph _worldGraph;
+    WorldGraphManager _worldGraph;
 public:
     App();
     void run();

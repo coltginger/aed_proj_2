@@ -8,16 +8,18 @@
 #define AED_PROJ_2_WORLDGRAPH_H
 
 
-class WorldGraph {
+class WorldGraphManager {
 private:
     FileManager _vectors;
     vector<Airline> _airlines;
     Graph<Airport> _world;
 
 public:
-    WorldGraph();
+    WorldGraphManager();
+    
     void makeAirports();
     void makeAirlines();
+    void makeFlights();
 };
 
 

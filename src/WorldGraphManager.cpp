@@ -1,11 +1,11 @@
-#include "WorldGraph.h"
+#include "WorldGraphManager.h"
 
-WorldGraph::WorldGraph() {
+WorldGraphManager::WorldGraphManager() {
     makeAirports();
     makeAirlines();
 }
 
-void WorldGraph::makeAirports() {
+void WorldGraphManager::makeAirports() {
     vector<Airport> res;
     auto filevector = _vectors.getAirportsFile();
     for (int i = 0; i < filevector.size(); i+=6){
@@ -20,7 +20,7 @@ void WorldGraph::makeAirports() {
     }
 }
 
-void WorldGraph::makeAirlines() {
+void WorldGraphManager::makeAirlines() {
     vector<Airline> res;
     auto filevector = _vectors.getAirlinesFile();
     for (int i = 0; i < filevector.size(); i+=4){
@@ -31,4 +31,8 @@ void WorldGraph::makeAirlines() {
         Airline newairline = Airline(code, name, callsign, country);
         _airlines.push_back(newairline);
     }
+}
+
+void WorldGraphManager::makeFlights() {
+    //TODO
 }
