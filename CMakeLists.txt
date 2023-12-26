@@ -15,4 +15,6 @@ add_executable(aed_proj_2
         src/Airline.h
         src/Airline.cpp
         src/Flight.h
-        src/Flight.cpp)
+        src/Flight.cpp
+        src/FileManager.h
+        src/FileManager.cpp)
