@@ -2,6 +2,7 @@
 
 WorldGraph::WorldGraph() {
     makeAirports();
+    makeAirlines();
 }
 
 void WorldGraph::makeAirports() {
