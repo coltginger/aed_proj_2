@@ -8,4 +8,9 @@ include_directories(src)
 add_executable(aed_proj_2
         src/App.cpp
         src/App.h
-        src/Graph.h)
+        src/Graph.h
+        src/Airport.h
+        src/Airport.h
+        src/Airport.cpp
+        src/Airline.h
+        src/Airline.cpp)
