@@ -42,3 +42,12 @@ float Airport::getLatitude() {
 float Airport::getLongitude() {
     return _longitude;
 }
+
+bool Airport::operator==(const Airport &other) const {
+    return _code == other._code &&
+           _name == other._name &&
+           _city == other._city &&
+           _country == other._country &&
+           _latitude == other._latitude &&
+           _longitude == other._longitude;
+}

@@ -91,6 +91,13 @@ build CMakeFiles/aed_proj_2.dir/src/WorldGraph.cpp.obj: CXX_COMPILER__aed_proj_2
   OBJECT_DIR = CMakeFiles\aed_proj_2.dir
   OBJECT_FILE_DIR = CMakeFiles\aed_proj_2.dir\src
 
+build CMakeFiles/aed_proj_2.dir/main.cpp.obj: CXX_COMPILER__aed_proj_2_unscanned_Debug C$:/Users/gnbar/OneDrive/Documents/GitHub/aed_proj_2/main.cpp || cmake_object_order_depends_target_aed_proj_2
+  DEP_FILE = CMakeFiles\aed_proj_2.dir\main.cpp.obj.d
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/gnbar/OneDrive/Documents/GitHub/aed_proj_2/src
+  OBJECT_DIR = CMakeFiles\aed_proj_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\aed_proj_2.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target aed_proj_2
@@ -99,7 +106,7 @@ build CMakeFiles/aed_proj_2.dir/src/WorldGraph.cpp.obj: CXX_COMPILER__aed_proj_2
 #############################################
 # Link the executable aed_proj_2.exe
 
-build aed_proj_2.exe: CXX_EXECUTABLE_LINKER__aed_proj_2_Debug CMakeFiles/aed_proj_2.dir/src/App.cpp.obj CMakeFiles/aed_proj_2.dir/src/Airport.cpp.obj CMakeFiles/aed_proj_2.dir/src/Airline.cpp.obj CMakeFiles/aed_proj_2.dir/src/Flight.cpp.obj CMakeFiles/aed_proj_2.dir/src/FileManager.cpp.obj CMakeFiles/aed_proj_2.dir/src/WorldGraph.cpp.obj
+build aed_proj_2.exe: CXX_EXECUTABLE_LINKER__aed_proj_2_Debug CMakeFiles/aed_proj_2.dir/src/App.cpp.obj CMakeFiles/aed_proj_2.dir/src/Airport.cpp.obj CMakeFiles/aed_proj_2.dir/src/Airline.cpp.obj CMakeFiles/aed_proj_2.dir/src/Flight.cpp.obj CMakeFiles/aed_proj_2.dir/src/FileManager.cpp.obj CMakeFiles/aed_proj_2.dir/src/WorldGraph.cpp.obj CMakeFiles/aed_proj_2.dir/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\aed_proj_2.dir

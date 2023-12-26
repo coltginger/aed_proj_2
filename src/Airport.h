@@ -24,6 +24,8 @@ public:
     string getCountry();
     float getLatitude();
     float getLongitude();
+    bool operator==(const Airport& other) const;
+
 };
 
 
