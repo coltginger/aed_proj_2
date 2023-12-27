@@ -53,9 +53,9 @@ void WorldGraphManager::addFlights() {
     for(int i = 0; i<_flights.size(); i++){
         Vertex<Airport>* source = airportFinder(_flights[i].getSource());
         Vertex<Airport>* target = airportFinder(_flights[i].getTarget());
-        float weight = pow((
+        float weight = sqrt(
                 pow((source->getInfo().getLongitude() - target->getInfo().getLongitude()), 2) +
-                pow((source->getInfo().getLatitude() - target->getInfo().getLatitude()), 2)), 1/2);
+                pow((source->getInfo().getLatitude() - target->getInfo().getLatitude()), 2));
         _world.addEdge(source->getInfo(), target->getInfo(), weight);
     }
 }
