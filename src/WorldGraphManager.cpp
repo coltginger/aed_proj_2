@@ -56,7 +56,8 @@ void WorldGraphManager::addFlights() {
         float weight = sqrt(
                 pow((source->getInfo().getLongitude() - target->getInfo().getLongitude()), 2) +
                 pow((source->getInfo().getLatitude() - target->getInfo().getLatitude()), 2));
-        _world.addEdge(source->getInfo(), target->getInfo(), weight);
+        string airl = _flights[i].getAirline();
+        _world.addEdge(source->getInfo(), target->getInfo(), weight, airl);
     }
 }
 

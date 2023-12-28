@@ -1,6 +1,7 @@
 #include "App.h"
 #include <iostream>
 #include <string>
+#include <limits>
 using namespace std;
 
 void App::run() {
@@ -29,9 +30,10 @@ void App::run() {
                 int b = _worldGraph.numberOfFlights();
 
                 cout << endl << "There are " << a << " airports and " << b << " available flights." << endl;
-
-                break;
-
+                cout << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
+                
         }
     }
 }

@@ -29,7 +29,7 @@ class Vertex {
     int num;               // auxiliary field
     int low;               // auxiliary field
 
-    void addEdge(Vertex<T> *dest, double w);
+    void addEdge(Vertex<T> *dest, double w, string airl);
     bool removeEdgeTo(Vertex<T> *d);
 public:
     Vertex(T in);
@@ -61,9 +61,11 @@ template <class T>
 class Edge {
     Vertex<T> * dest;      // destination vertex
     double weight;         // edge weight
+    string airline;
 public:
-    Edge(Vertex<T> *d, double w);
+    Edge(Vertex<T> *d, double w, string airl);
     Vertex<T> *getDest() const;
+    string getAirline();
     void setDest(Vertex<T> *dest);
     double getWeight() const;
     void setWeight(double weight);
@@ -85,7 +87,7 @@ public:
     int getNumVertex() const;
     bool addVertex(const T &in);
     bool removeVertex(const T &in);
-    bool addEdge(const T &sourc, const T &dest, double w);
+    bool addEdge(const T &sourc, const T &dest, double w, string airl);
     bool removeEdge(const T &sourc, const T &dest);
     vector<Vertex<T> * > getVertexSet() const;
     vector<T> dfs() const;
@@ -101,7 +103,7 @@ template <class T>
 Vertex<T>::Vertex(T in): info(in) {}
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *d, double w): dest(d), weight(w) {}
+Edge<T>::Edge(Vertex<T> *d, double w, string airl): dest(d), weight(w), airline(airl) {}
 
 
 template <class T>
@@ -137,6 +139,11 @@ void Vertex<T>::setProcessing(bool p) {
 template<class T>
 Vertex<T> *Edge<T>::getDest() const {
     return dest;
+}
+
+template<class T>
+string Edge<T>::getAirline() {
+    return airline;
 }
 
 template<class T>
@@ -235,12 +242,12 @@ bool Graph<T>::addVertex(const T &in) {
  * Returns true if successful, and false if the source or destination vertex does not exist.
  */
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double w, string airl) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == NULL || v2 == NULL)
         return false;
-    v1->addEdge(v2,w);
+    v1->addEdge(v2,w, airl);
     return true;
 }
 
@@ -249,8 +256,8 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
  * with a given destination vertex (d) and edge weight (w).
  */
 template <class T>
-void Vertex<T>::addEdge(Vertex<T> *d, double w) {
-    adj.push_back(Edge<T>(d, w));
+void Vertex<T>::addEdge(Vertex<T> *d, double w, string airl) {
+    adj.push_back(Edge<T>(d, w, airl));
 }
 
 
