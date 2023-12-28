@@ -18,7 +18,7 @@ void App::run() {
              << "6. Number of reachable destinations (airports, cities or countries) from a given airport in a maximum number of X stops." << endl
              << "7. Trip with the most stops and its airports." << endl
              << "8. Airport with the most number of related flights." << endl
-             << "9. Airports that are essencial to the networks circulation." << endl
+             << "9. Airports that are essential to the networks circulation." << endl
              << "0. Present the best flight option." << endl << endl
              << "Please select an option (number): ";
 
@@ -82,7 +82,10 @@ void App::run() {
                         cout << endl << "The airport goes to " << a << " different countries.";
                         break;
                     case 2:
-
+                        cout << endl << "Input the city's name: ";
+                        cin >> source;
+                        a = _worldGraph.numberOfCountriesCity(source);
+                        cout << endl << "The city's airports go to " << a << " different countries.";
                         break;
                 }
                 cout << endl << "Press enter to continue." << endl;

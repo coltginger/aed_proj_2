@@ -168,6 +168,23 @@ int WorldGraphManager::numberOfCountriesAirpoart(std::string source) {
     return res;
 }
 
+int WorldGraphManager::numberOfCountriesCity(std::string source) {
+    int res;
+    vector<string> checked;
+    for(auto v : _world.getVertexSet()){
+        if (v->getInfo().getCity() == source){
+            for(auto i : v->getAdj()){
+                string destcountry = i.getDest()->getInfo().getCountry();
+                auto it = find(checked.begin(),checked.end(), destcountry);
+                if(it == checked.end()){
+                    checked.push_back(destcountry);
+                    res++;
+                }
+            }
+        }
+    }
+    return res;
+}
 
 Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
     string newsource;
