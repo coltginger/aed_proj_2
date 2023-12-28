@@ -14,7 +14,7 @@ void App::run() {
              << "2. Number of flights out of an airport and from how many different airlines." << endl
              << "3. Number of flights per city or airline." << endl
              << "4. Number of different countries that a given airport/city flies to." << endl
-             << "5. Number of destinations (airports, cities or countries) available for a given airport." << endl
+             << "5. Number of destinations (airports or cities) available for a given airport." << endl
              << "6. Number of reachable destinations (airports, cities or countries) from a given airport in a maximum number of X stops." << endl
              << "7. Trip with the most stops and its airports." << endl
              << "8. Airport with the most number of related flights." << endl
@@ -88,6 +88,33 @@ void App::run() {
                         cout << endl << "The city's airports go to " << a << " different countries.";
                         break;
                 }
+                cout << endl << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
+                break;
+            case 5:
+                cout << "Do you wish to know airports(1) or cities(2)? (Input the number): " << endl;
+                cin >> option2;
+                switch (option2) {
+                    case 1:
+                        cout << "Input the airport's code (in capital letters): ";
+                        cin >> source;
+                        a = _worldGraph.numberOfAirportsAirport(source);
+                        cout << endl << "The airport goes to " << a << " different airports.";
+                        break;
+                    case 2:
+                        cout << "Input the airport's code (in capital letters): ";
+                        cin >> source;
+                        a = _worldGraph.numberOfCitiesAirport(source);
+                        cout << endl << "The airport goes to " << a << " different cities.";
+                        break;
+                }
+                cout << endl << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
+                break;
+            case 6:
+                
                 cout << endl << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();

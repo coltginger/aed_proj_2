@@ -36,6 +36,9 @@ public:
 
     int numberOfCountriesAirpoart(string source);
     int numberOfCountriesCity(string source);
+
+    int numberOfAirportsAirport(string source);
+    int numberOfCitiesAirport(string source);
 };
 
 

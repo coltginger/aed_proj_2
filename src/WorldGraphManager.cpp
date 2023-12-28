@@ -186,6 +186,37 @@ int WorldGraphManager::numberOfCountriesCity(std::string source) {
     return res;
 }
 
+int WorldGraphManager::numberOfAirportsAirport(std::string source) {
+    int res;
+    vector<string> checked;
+    auto v = airportFinder(source);
+    for (auto i : v->getAdj()){
+        string destairport = i.getDest()->getInfo().getCode();
+        auto it = find(checked.begin(),checked.end(), destairport);
+        if(it == checked.end()){
+            checked.push_back(destairport);
+            res++;
+        }
+    }
+    return res;
+}
+
+int WorldGraphManager::numberOfCitiesAirport(std::string source) {
+    int res;
+    vector<string> checked;
+    auto v = airportFinder(source);
+    for (auto i : v->getAdj()){
+        string destcity = i.getDest()->getInfo().getCity();
+        auto it = find(checked.begin(),checked.end(), destcity);
+        if(it == checked.end()){
+            checked.push_back(destcity);
+            res++;
+        }
+    }
+    return res;
+
+}
+
 Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
     string newsource;
     for(auto i : _world.getVertexSet())
