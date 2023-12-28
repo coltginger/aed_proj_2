@@ -28,6 +28,8 @@ public:
 
     int numberOfAirports();
     int numberOfFlights();
+
+    pair<int, int> numberOfFlightsInAirport(string source);
 };
 
 

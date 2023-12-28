@@ -22,18 +22,32 @@ void App::run() {
 
         int option;
 
+        int a;
+        int b;
+        pair <int, int> c;
+        string source;
+
         cin >> option;
 
         switch (option) {
             case 1:
-                int a = _worldGraph.numberOfAirports();
-                int b = _worldGraph.numberOfFlights();
+                a = _worldGraph.numberOfAirports();
+                b = _worldGraph.numberOfFlights();
 
                 cout << endl << "There are " << a << " airports and " << b << " available flights." << endl;
                 cout << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
-                
+            case 2:
+                cout << endl << "Give the airport's code: ";
+                cin >> source;
+
+                c = _worldGraph.numberOfFlightsInAirport(source);
+
+                cout << endl << "There are " << c.first << " flights out of this airport from " << c.second << " different airlines." << endl;
+                cout << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
         }
     }
 }

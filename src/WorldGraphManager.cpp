@@ -1,5 +1,7 @@
 #include "WorldGraphManager.h"
 #include <cmath>
+#include <algorithm>
+
 using namespace std;
 
 WorldGraphManager::WorldGraphManager() {
@@ -79,5 +81,23 @@ int WorldGraphManager::numberOfFlights() {
     for (auto i: _flights){
         res++;
     }
+    return res;
+}
+
+pair<int, int> WorldGraphManager::numberOfFlightsInAirport(std::string source) {
+    pair<int, int> res;
+    int res1 = 0;
+    vector<string> airlines;
+    auto s = airportFinder(source);
+    for (auto i : s->getAdj()){
+        res1++;
+        auto it = find(airlines.begin(), airlines.end(), i.getAirline());
+        if(it == airlines.end()){
+            airlines.push_back(i.getAirline());
+        }
+    }
+    int res2 = airlines.size();
+    res.first = res1;
+    res.second = res2;
     return res;
 }
