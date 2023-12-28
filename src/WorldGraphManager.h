@@ -33,6 +33,9 @@ public:
 
     vector<pair<string, int>> numberOfFlightsPerCity();
     vector<pair<string, int>> numberOfFlightsPerAirline();
+
+    int numberOfCountriesAirpoart(string source);
+    int numberOfCountriesCity(string source);
 };
 
 

@@ -23,7 +23,7 @@ void App::run() {
              << "Please select an option (number): ";
 
         int option;
-
+        int option2;
         int a;
         int b;
         pair <int, int> c;
@@ -43,7 +43,7 @@ void App::run() {
                 cin.get();
                 break;
             case 2:
-                cout << endl << "Input the airport's code: ";
+                cout << endl << "Input the airport's code (in capital letters): ";
                 cin >> source;
 
                 c = _worldGraph.numberOfFlightsInAirport(source);
@@ -66,6 +66,29 @@ void App::run() {
                 for (auto i :e){
                     cout << endl << i.first << " -- " << i.second;
                 }
+                cout << endl << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
+                break;
+            case 4:
+                cout << endl << "Airport(1) or City(2)? (Input the number): ";
+                cin >> option2;
+
+                switch (option2) {
+                    case 1:
+                        cout << endl << "Input the airport's code (in capital letters): ";
+                        cin >> source;
+                        a = _worldGraph.numberOfCountriesAirpoart(source);
+                        cout << endl << "The airport goes to " << a << " different countries.";
+                        break;
+                    case 2:
+
+                        break;
+                }
+                cout << endl << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
+                break;
         }
     }
 }

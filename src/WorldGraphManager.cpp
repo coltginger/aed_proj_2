@@ -1,6 +1,7 @@
 #include "WorldGraphManager.h"
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -61,11 +62,6 @@ void WorldGraphManager::addFlights() {
         string airl = _flights[i].getAirline();
         _world.addEdge(source->getInfo(), target->getInfo(), weight, airl);
     }
-}
-
-Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
-    for(auto i : _world.getVertexSet())
-        if (code == i->getInfo().getCode()) return i;
 }
 
 int WorldGraphManager::numberOfAirports() {
@@ -155,4 +151,29 @@ vector<pair<string, int>> WorldGraphManager::numberOfFlightsPerAirline() {
         }
     }
     return res;
+}
+
+int WorldGraphManager::numberOfCountriesAirpoart(std::string source) {
+    int res;
+    vector<string> checked;
+    auto v = airportFinder(source);
+    for(auto i : v->getAdj()){
+        string destcountry = i.getDest()->getInfo().getCountry();
+        auto it = find(checked.begin(),checked.end(), destcountry);
+        if(it == checked.end()){
+            checked.push_back(destcountry);
+            res++;
+        }
+    }
+    return res;
+}
+
+
+Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
+    string newsource;
+    for(auto i : _world.getVertexSet())
+        if (code == i->getInfo().getCode()) return i;
+    cout << "That code does not exist, try again: ";
+    cin >> newsource;
+    return airportFinder(newsource);
 }
