@@ -25,6 +25,9 @@ public:
     void addFlights();
 
     Vertex<Airport>* airportFinder(string code);
+
+    int numberOfAirports();
+    int numberOfFlights();
 };
 
 

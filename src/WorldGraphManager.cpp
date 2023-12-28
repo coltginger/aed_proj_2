@@ -64,3 +64,19 @@ Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
     for(auto i : _world.getVertexSet())
         if (code == i->getInfo().getCode()) return i;
 }
+
+int WorldGraphManager::numberOfAirports() {
+    int res = 0;
+    for (auto i : _world.getVertexSet()){
+        res++;
+    }
+    return res;
+}
+
+int WorldGraphManager::numberOfFlights() {
+    int res = 0;
+    for (auto i: _flights){
+        res++;
+    }
+    return res;
+}
