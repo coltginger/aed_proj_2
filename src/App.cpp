@@ -114,11 +114,27 @@ void App::run() {
                 cin.get();
                 break;
             case 6:
-                
+
                 cout << endl << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
                 break;
+            case 7:
+                cout << endl << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
+                break;
+            case 8:
+                cout << endl << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
+                break;
+            case 9:
+                cout << endl << "Press enter to continue." << endl;
+                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                cin.get();
+                break;
+
         }
     }
 }
