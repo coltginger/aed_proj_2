@@ -30,6 +30,9 @@ public:
     int numberOfFlights();
 
     pair<int, int> numberOfFlightsInAirport(string source);
+
+    vector<pair<string, int>> numberOfFlightsPerCity();
+    vector<pair<string, int>> numberOfFlightsPerAirline();
 };
 
 

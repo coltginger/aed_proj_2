@@ -69,10 +69,7 @@ Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
 }
 
 int WorldGraphManager::numberOfAirports() {
-    int res = 0;
-    for (auto i : _world.getVertexSet()){
-        res++;
-    }
+    int res = _world.getNumVertex();
     return res;
 }
 
@@ -99,5 +96,63 @@ pair<int, int> WorldGraphManager::numberOfFlightsInAirport(std::string source) {
     int res2 = airlines.size();
     res.first = res1;
     res.second = res2;
+    return res;
+}
+
+vector<pair<string, int>> WorldGraphManager::numberOfFlightsPerCity() {
+    vector<pair<string, int>> res;
+    for (auto v : _world.getVertexSet()) {
+
+        for (auto f: v->getAdj()) {
+            string target = f.getDest()->getInfo().getCity();
+            auto it = std::find_if(res.begin(), res.end(),
+                                   [target](const std::pair<string, int> &element) {
+                                       return element.first == target;
+                                   });
+            if (it == res.end()) {
+                pair<string, int> newcity;
+                newcity.first = f.getDest()->getInfo().getCity();
+                newcity.second = 1;
+                res.push_back(newcity);
+            } else {
+                it->second++;
+            }
+        }
+
+        string target2 = v->getInfo().getCity();
+        auto it2 = std::find_if(res.begin(), res.end(),
+                               [target2](const std::pair<string, int> &element) {
+                                   return element.first == target2;
+                               });
+        if(it2==res.end()){
+            pair<string, int> newcity;
+            newcity.first = v->getInfo().getCity();
+            newcity.second = v->getAdj().size();
+            res.push_back(newcity);
+        }
+        else{
+            it2->second += v->getAdj().size();
+        }
+    }
+    return res;
+}
+
+vector<pair<string, int>> WorldGraphManager::numberOfFlightsPerAirline() {
+    vector<pair<string, int>> res;
+    for (auto f : _flights){
+        string target = f.getAirline();
+        auto it = std::find_if(res.begin(), res.end(),
+                               [target](const std::pair<string, int> &element) {
+                                   return element.first == target;
+                               });
+        if (it == res.end()) {
+            pair<string, int> newairline;
+            newairline.first = f.getAirline();
+            newairline.second = 1;
+            res.push_back(newairline);
+        } else {
+            it->second++;
+        }
+    }
     return res;
 }

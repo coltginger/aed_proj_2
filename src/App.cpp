@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <limits>
+#include <algorithm>
+
 using namespace std;
 
 void App::run() {
@@ -25,6 +27,7 @@ void App::run() {
         int a;
         int b;
         pair <int, int> c;
+        vector<pair<string, int>> d, e;
         string source;
 
         cin >> option;
@@ -38,6 +41,7 @@ void App::run() {
                 cout << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
+                break;
             case 2:
                 cout << endl << "Input the airport's code: ";
                 cin >> source;
@@ -48,8 +52,20 @@ void App::run() {
                 cout << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
+                break;
             case 3:
-                cout << endl << ""
+                d = _worldGraph.numberOfFlightsPerCity();
+                e = _worldGraph.numberOfFlightsPerAirline();
+                sort(d.begin(), d.end());
+                sort(e.begin(), e.end());
+                cout << endl << "Flights per city: ";
+                for (auto i : d){
+                    cout << endl << i.first << " -- " << i.second;
+                }
+                cout << endl << "Flights per airline: ";
+                for (auto i :e){
+                    cout << endl << i.first << " -- " << i.second;
+                }
         }
     }
 }
