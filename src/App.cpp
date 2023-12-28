@@ -39,7 +39,7 @@ void App::run() {
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
             case 2:
-                cout << endl << "Give the airport's code: ";
+                cout << endl << "Input the airport's code: ";
                 cin >> source;
 
                 c = _worldGraph.numberOfFlightsInAirport(source);
@@ -48,6 +48,8 @@ void App::run() {
                 cout << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
+            case 3:
+                cout << endl << ""
         }
     }
 }
