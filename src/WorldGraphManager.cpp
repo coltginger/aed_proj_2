@@ -286,6 +286,31 @@ Airport WorldGraphManager::findTopKAirport() {
     return vector[0].second;
 }
 
+vector<Airport> WorldGraphManager::findEssentials() {
+    vector<Airport> res;
+    for (auto i : _world.getVertexSet()){
+        for (auto j: i->getAdj()){
+            j.getDest()->setIndegree(0);
+        }
+    }
+    for (auto i : _world.getVertexSet()){
+        for (auto j: i->getAdj()){
+            j.getDest()->addIndegree();
+        }
+    }
+    for (auto i : _world.getVertexSet()){
+        for(auto j : i->getAdj()){
+            if(j.getDest()->getIndegree() == 1){
+                res.push_back(i->getInfo());
+                break;
+            }
+        }
+    }
+//TODO
+//sort the vector
+    return res;
+}
+
 Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
     string newsource;
     for(auto i : _world.getVertexSet())

@@ -29,6 +29,7 @@ void App::run() {
         pair <int, int> c;
         vector<pair<string, int>> d, e;
         Airport f;
+        vector<Airport> g;
         string source;
 
         cin >> option;
@@ -140,6 +141,11 @@ void App::run() {
                 cin.get();
                 break;
             case 9:
+                cout << "The airports that are essential are: " << endl;
+                g = _worldGraph.findEssentials();
+                for (auto i : g){
+                    cout << "-- " << i.getName() << endl;
+                }
                 cout << endl << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();

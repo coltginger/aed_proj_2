@@ -45,6 +45,7 @@ public:
     int getIndegree() const;
 
     void setIndegree(int indegree);
+    void addIndegree();
 
     int getNum() const;
 
@@ -185,6 +186,11 @@ int Vertex<T>::getIndegree() const {
 template<class T>
 void Vertex<T>::setIndegree(int indegree) {
     Vertex::indegree = indegree;
+}
+
+template<class T>
+void Vertex<T>::addIndegree(){
+    Vertex::indegree++;
 }
 
 template<class T>

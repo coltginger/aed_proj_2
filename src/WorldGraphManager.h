@@ -45,6 +45,8 @@ public:
     vector<pair<int, pair<Airport, Airport>>> findLongestTrips();
 
     Airport findTopKAirport();
+
+    vector<Airport> findEssentials();
 };
 
 
