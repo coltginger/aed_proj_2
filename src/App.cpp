@@ -114,6 +114,13 @@ void App::run() {
                 cin.get();
                 break;
             case 6:
+                cout << endl << "Input the starting airport's code (in capital letters): ";
+                cin >> source;
+                cout << "What is the maximum number of stops?: ";
+                cin >> a;
+
+                b = _worldGraph.numberOfAirportsAtX(source, a);
+                cout << endl << "There are " << b << " airports at a distance of " << a << " stops.";
 
                 cout << endl << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');

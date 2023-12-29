@@ -217,6 +217,33 @@ int WorldGraphManager::numberOfCitiesAirport(std::string source) {
 
 }
 
+int WorldGraphManager::numberOfAirportsAtX(std::string source, int distance) {
+    for (auto i : _world.getVertexSet()) i->setVisited(false);
+    vector<Airport> res;
+    auto s = airportFinder(source);
+    queue<Vertex<Airport>*> q;
+    q.push(s);
+    s->setVisited(true);
+    int level = 0;
+    while(!q.empty()){
+        int level_size = q.size();
+        while (level_size != 0){
+            s = q.front();
+            q.pop();
+            if(level <= distance) res.push_back(s->getInfo());
+            for (auto e : s->getAdj()){
+                if(!e.getDest()->isVisited()){
+                    q.push(e.getDest());
+                    e.getDest()->setVisited(true);
+                }
+            }
+            level_size--;
+        }
+        level++;
+    }
+    return (res.size());
+}
+
 Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
     string newsource;
     for(auto i : _world.getVertexSet())

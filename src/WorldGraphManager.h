@@ -39,6 +39,8 @@ public:
 
     int numberOfAirportsAirport(string source);
     int numberOfCitiesAirport(string source);
+
+    int numberOfAirportsAtX(string source, int distance);
 };
 
 
