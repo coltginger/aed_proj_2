@@ -248,8 +248,9 @@ int WorldGraphManager::numberOfAirportsAtX(std::string source, int distance) {
     return (res.size());
 }
 
-vector<pair<int, pair<Airport, Airport>>> WorldGraphManager::findLongestTrips() {
-    vector<pair<int, pair<Airport, Airport>>> res;
+vector<pair<Airport, Airport>> WorldGraphManager::findLongestTrips() {
+    vector<pair<Airport, Airport>> res;
+//TODO
     return res;
 }
 
