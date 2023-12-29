@@ -2,6 +2,8 @@
 #include <cmath>
 #include <algorithm>
 #include <iostream>
+#include <string>
+
 
 using namespace std;
 
@@ -71,8 +73,10 @@ int WorldGraphManager::numberOfAirports() {
 
 int WorldGraphManager::numberOfFlights() {
     int res = 0;
-    for (auto i: _flights){
-        res++;
+    for (auto i: _world.getVertexSet()){
+        for (auto j : i->getAdj()){
+            res++;
+        }
     }
     return res;
 }
@@ -242,6 +246,44 @@ int WorldGraphManager::numberOfAirportsAtX(std::string source, int distance) {
         level++;
     }
     return (res.size());
+}
+
+vector<pair<int, pair<Airport, Airport>>> WorldGraphManager::findLongestTrips() {
+    vector<pair<int, pair<Airport, Airport>>> res;
+    return res;
+}
+
+Airport WorldGraphManager::findTopKAirport() {
+    vector<pair<int, Airport>> vector;
+    for(auto i : _world.getVertexSet()){
+        pair<int, Airport> newpair;
+        newpair.first = i->getAdj().size();
+        newpair.second = i->getInfo();
+        vector.push_back(newpair);
+    }
+    for (auto i : _world.getVertexSet()){
+        for (auto j : i->getAdj()){
+            Airport target = j.getDest()->getInfo();
+            auto it = std::find_if(vector.begin(), vector.end(),
+                                   [target](const std::pair<int, Airport> &element) {
+                                       return element.second == target;
+                                   });
+            if(it == vector.end()){
+                pair<int, Airport> newpair;
+                newpair.first = 1;
+                newpair.second = j.getDest()->getInfo();
+                vector.push_back(newpair);
+            }
+            else{
+                it->first++;
+            }
+        }
+    }
+    auto pairComparator = [](const pair<int, Airport>& a, const pair<int, Airport>& b) {
+        return a.first > b.first;
+    };
+    sort(vector.begin(), vector.end(), pairComparator);
+    return vector[0].second;
 }
 
 Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
