@@ -18,7 +18,6 @@ void App::run() {
              << "6. Number of reachable destinations (airports, cities or countries) from a given airport in a maximum number of X stops." << endl
              << "7. Trip with the most stops and its airports." << endl
              << "8. Airport with the most number of related flights." << endl
-             << "9. Airports that are essential to the networks circulation." << endl
              << "0. Present the best flight option." << endl << endl
              << "Please select an option (number): ";
 
@@ -29,7 +28,7 @@ void App::run() {
         pair <int, int> c;
         vector<pair<string, int>> d, e;
         Airport f;
-        vector<Airport> g;
+        vector<string> g;
         string source;
 
         cin >> option;
@@ -140,17 +139,6 @@ void App::run() {
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
                 break;
-            case 9:
-                cout << "The airports that are essential are: " << endl;
-                g = _worldGraph.findEssentials();
-                for (auto i : g){
-                    cout << "-- " << i.getName() << endl;
-                }
-                cout << endl << "Press enter to continue." << endl;
-                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
-                cin.get();
-                break;
-
         }
     }
 }

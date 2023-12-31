@@ -28,6 +28,7 @@ class Vertex {
     int indegree;          // auxiliary field
     int num;               // auxiliary field
     int low;               // auxiliary field
+    bool stacked;
 
     void addEdge(Vertex<T> *dest, double w, string airl);
     bool removeEdgeTo(Vertex<T> *d);
@@ -54,6 +55,10 @@ public:
     int getLow() const;
 
     void setLow(int low);
+
+    bool getStacked() const;
+
+    void setStacked(bool statement);
 
     friend class Graph<T>;
 };
@@ -211,6 +216,16 @@ int Vertex<T>::getLow() const {
 template<class T>
 void Vertex<T>::setLow(int low) {
     Vertex::low = low;
+}
+
+template<class T>
+bool Vertex<T>::getStacked() const {
+    return stacked;
+}
+
+template<class T>
+void Vertex<T>::setStacked(bool statement) {
+    stacked = statement;
 }
 
 template <class T>

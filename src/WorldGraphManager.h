@@ -46,7 +46,6 @@ public:
 
     Airport findTopKAirport();
 
-    vector<Airport> findEssentials();
 };
 
 
