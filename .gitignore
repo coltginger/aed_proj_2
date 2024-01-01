@@ -1,0 +1,23 @@
+# CLion specific
+.idea/
+*.iml
+
+# Build output
+cmake-build-*/
+
+# Dependency directories (uncomment if you have dependencies)
+# libs/
+
+# Compiled files
+*.o
+*.a
+*.so
+*.exe
+*.dll
+
+# Backup & Log files
+*.log
+*.bak
+
+# Other files
+*.DS_Store
