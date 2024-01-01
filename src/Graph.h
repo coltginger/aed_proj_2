@@ -9,8 +9,18 @@
 #include <queue>
 #include <stack>
 #include <list>
+#include <map>
+#include <climits>
 
 using namespace std;
+
+template <class T>
+struct Connection {
+    T source;
+    T destination;
+    string airline;
+};
+
 
 template <class T> class Edge;
 template <class T> class Graph;
@@ -29,6 +39,7 @@ class Vertex {
     int num;               // auxiliary field
     int low;               // auxiliary field
     bool stacked;
+    Vertex<T> *pred;
 
     void addEdge(Vertex<T> *dest, double w, string airl);
     bool removeEdgeTo(Vertex<T> *d);
@@ -101,6 +112,11 @@ public:
     vector<T> bfs(const T &source) const;
     vector<T> topsort() const;
     bool isDAG() const;
+
+
+    vector<vector<Connection<T>>> multiBfs(vector<T> sources, vector<T> destinations) const;
+
+    vector<vector<Connection<T>>> findAllShortestPaths(Vertex<T> *source, Vertex<T> *destination) const;
 };
 
 /****************** Provided constructors and functions ********************/
@@ -415,6 +431,80 @@ vector<T> Graph<T>::bfs(const T & source) const {
         }
     }
     return res;
+}
+
+/*
+ * BFS to search for the shortest path between two airports.
+ */
+template <class T>
+vector<vector<Connection<T>>> Graph<T>::findAllShortestPaths(Vertex<T> *source, Vertex<T> *destination) const {
+    vector<vector<Connection<T>>> allPaths;
+    if (source == nullptr || destination == nullptr) return allPaths;
+
+    map<Vertex<T>*, int> level;
+    for (auto v : vertexSet) {
+        level[v] = -1;  // Initialize level for each vertex
+    }
+
+    queue<vector<Connection<T>>> q;
+    q.push({});  // start with an empty path
+    level[source] = 0;
+
+    int shortestPathLength = INT_MAX;
+
+    while (!q.empty()) {
+        auto path = q.front();
+        q.pop();
+        Vertex<T>* lastVertex = path.empty() ? source : findVertex(path.back().destination);
+
+
+        if (lastVertex == destination) {
+            if (path.size() < shortestPathLength) {
+                allPaths.clear();
+                shortestPathLength = path.size();
+            }
+            if (path.size() == shortestPathLength) {
+                allPaths.push_back(path);
+            }
+            continue;
+        }
+
+        for (auto &e : lastVertex->adj) {
+            Vertex<T>* nextVertex = e.dest;
+            if (level[nextVertex] == -1 || level[nextVertex] >= level[lastVertex] + 1) {
+                level[nextVertex] = level[lastVertex] + 1;
+                vector<Connection<T>> newPath(path);
+                Connection<T> conn;
+                conn.source = lastVertex->info;
+                conn.destination = nextVertex->info;
+                conn.airline = e.airline;
+                newPath.push_back(conn);
+                q.push(newPath);
+            }
+        }
+    }
+
+    return allPaths;
+}
+
+template <class T>
+vector<vector<Connection<T>>> Graph<T>::multiBfs(vector<T> sources, vector<T> destinations) const {
+    vector<vector<Connection<T>>> allPaths;
+
+    for (int i = 0; i < sources.size(); i++) {
+        auto sourceVertex = findVertex(sources[i]);
+        for (int j = 0; j < destinations.size(); j++) {
+            auto destinationVertex = findVertex(destinations[j]);
+            vector<vector<Connection<T>>> paths = findAllShortestPaths(sourceVertex, destinationVertex);
+
+            // Add the found paths to the overall list of paths
+            for (const auto &path : paths) {
+                allPaths.push_back(path);
+            }
+        }
+    }
+
+    return allPaths;
 }
 
 

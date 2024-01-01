@@ -1,9 +1,11 @@
 #include <string>
+#include <cmath>
 using namespace std;
 
 #ifndef AED_PROJ_2_AIRPORT_H
 #define AED_PROJ_2_AIRPORT_H
 
+const double EARTH_RADIUS_KM = 6371.0;
 
 class Airport {
 private:
@@ -26,6 +28,7 @@ public:
     float getLongitude();
     bool operator==(const Airport& other) const;
 
+    double getDistance(float latitude, float longitude);
 };
 
 
