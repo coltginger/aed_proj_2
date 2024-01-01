@@ -39,6 +39,13 @@ public:
 
     int numberOfAirportsAirport(string source);
     int numberOfCitiesAirport(string source);
+
+    int numberOfAirportsAtX(string source, int distance);
+
+    vector<pair<Airport, Airport>> findLongestTrips();
+
+    Airport findTopKAirport();
+
 };
 
 

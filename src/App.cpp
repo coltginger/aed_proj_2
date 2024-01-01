@@ -18,7 +18,6 @@ void App::run() {
              << "6. Number of reachable destinations (airports, cities or countries) from a given airport in a maximum number of X stops." << endl
              << "7. Trip with the most stops and its airports." << endl
              << "8. Airport with the most number of related flights." << endl
-             << "9. Airports that are essential to the networks circulation." << endl
              << "0. Present the best flight option." << endl << endl
              << "Please select an option (number): ";
 
@@ -28,6 +27,8 @@ void App::run() {
         int b;
         pair <int, int> c;
         vector<pair<string, int>> d, e;
+        Airport f;
+        vector<string> g;
         string source;
 
         cin >> option;
@@ -114,6 +115,13 @@ void App::run() {
                 cin.get();
                 break;
             case 6:
+                cout << endl << "Input the starting airport's code (in capital letters): ";
+                cin >> source;
+                cout << "What is the maximum number of stops?: ";
+                cin >> a;
+
+                b = _worldGraph.numberOfAirportsAtX(source, a);
+                cout << endl << "There are " << b << " airports at a distance of " << a << " stops.";
 
                 cout << endl << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
@@ -125,16 +133,12 @@ void App::run() {
                 cin.get();
                 break;
             case 8:
+                f = _worldGraph.findTopKAirport();
+                cout << endl << "The airport with the most number of related flights is " << f.getName();
                 cout << endl << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
                 break;
-            case 9:
-                cout << endl << "Press enter to continue." << endl;
-                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
-                cin.get();
-                break;
-
         }
     }
 }
