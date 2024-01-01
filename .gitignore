@@ -9,6 +9,7 @@ cmake-build-release/ # Similarly for release build directory, if needed
 
 # CMake cache and generated files
 CMakeCache.txt
+CMakeLists.txt
 CMakeFiles/
 cmake_install.cmake
 Makefile
