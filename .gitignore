@@ -2,8 +2,17 @@
 .idea/
 *.iml
 
-# Build output
+# Build output directories
 cmake-build-*/
+cmake-build-debug/   # Add this line if you want to specifically ignore the debug build directory
+cmake-build-release/ # Similarly for release build directory, if needed
+
+# CMake cache and generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.make
 
 # Dependency directories (uncomment if you have dependencies)
 # libs/
