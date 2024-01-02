@@ -20,9 +20,9 @@ void App::run() {
              << "4. Number of different countries that a given airport/city flies to." << endl
              << "5. Number of destinations (airports or cities) available for a given airport." << endl
              << "6. Number of reachable airports from a given airport in a maximum number of X stops." << endl
-             << "7. Trip with the most stops and its airports." << endl
-             << "8. Airport with the most number of related flights." << endl
-             << "9. Present the best flight option." << endl << endl
+             << "7. Airport with the most number of related flights." << endl
+             << "8. Present the best flight option." << endl << endl
+             << "9. Close the Informer." << endl << endl
              << "Please select an option (number): ";
 
         int option;
@@ -38,6 +38,9 @@ void App::run() {
         cin >> option;
 
         switch (option) {
+            case 9:
+                STOP = false;
+                break;
             case 1:
                 a = _worldGraph.numberOfAirports();
                 b = _worldGraph.numberOfFlights();
@@ -132,18 +135,13 @@ void App::run() {
                 cin.get();
                 break;
             case 7:
-                cout << endl << "Press enter to continue." << endl;
-                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
-                cin.get();
-                break;
-            case 8:
                 f = _worldGraph.findTopKAirport();
                 cout << endl << "The airport with the most number of related flights is " << f.getName();
                 cout << endl << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
                 cin.get();
                 break;
-            case 9:
+            case 8:
                 string filters, origin, destiny, searchType, tempCode;
                 float latitude, longitude;
                 vector<float> coordinates = {200, 200, 200, 200};
