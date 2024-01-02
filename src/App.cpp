@@ -19,7 +19,7 @@ void App::run() {
              << "3. Number of flights per city or airline." << endl
              << "4. Number of different countries that a given airport/city flies to." << endl
              << "5. Number of destinations (airports or cities) available for a given airport." << endl
-             << "6. Number of reachable destinations (airports, cities or countries) from a given airport in a maximum number of X stops." << endl
+             << "6. Number of reachable airports from a given airport in a maximum number of X stops." << endl
              << "7. Trip with the most stops and its airports." << endl
              << "8. Airport with the most number of related flights." << endl
              << "9. Present the best flight option." << endl << endl
