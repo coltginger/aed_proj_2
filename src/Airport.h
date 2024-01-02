@@ -29,6 +29,7 @@ public:
     bool operator==(const Airport& other) const;
 
     double getDistance(float latitude, float longitude);
+
 };
 
 

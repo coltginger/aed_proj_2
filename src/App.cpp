@@ -140,77 +140,103 @@ void App::run() {
                 cin.get();
                 break;
             case 9:
-                string filters, origin, destiny, searchType;
+                string filters, origin, destiny, searchType, tempCode;
                 float latitude, longitude;
                 vector<float> coordinates = {200, 200, 200, 200};
+                vector<string> airlines, airports;
+                int maxAirlines = INT_MAX, n;
                 cout << endl << "Would you like to use filters? (Y/N)" << endl;
                 cin >> filters;
-                if (filters == "N" || filters == "n") {
-                    cout << endl << "Origin:" << endl
-                    << "1. Airport name/code or city name" << endl
-                    << "2. Coordinates" << endl;
-                    cin >> searchType;
-                    if (searchType == "1") {
-                        cout << endl << "Origin name: ";
-                        cin >> origin;
-                    } else if (searchType == "2") {
-                        cout << "Enter latitude (in degrees): ";
-                        cin >> latitude;
-                        cout << endl << "Enter longitude (in degrees): ";
-                        cin >> longitude;
-                        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
-                            cout << endl << "Invalid coordinates." << endl;
-                            cout << endl << "The airport with the most number of related flights is " << f.getName();
-                            cout << endl << "Press enter to continue." << endl;
-                            break;
+                if (filters == "Y" || filters == "y") {
+                    cout << endl << "Max number of airlines (use 0 for unlimited airlines): ";
+                    cin >> maxAirlines;
+                    if (maxAirlines < 1) maxAirlines = INT_MAX;
+                    cout << endl << "How many airlines do you want to select? (use 0 if you don't want to filter airlines): ";
+                    cin >> n;
+                    if (n > 0) {
+                        cout << endl << "Enter the code of the airlines you want to select: " << endl;
+                        for (int i = 0; i < n; i++) {
+                            cin >> tempCode;
+                            airlines.push_back(tempCode);
                         }
-                        coordinates[0] = latitude;
-                        coordinates[1] = longitude;
-                    } else {
-                        cout << endl << "The airport with the most number of related flights is " << f.getName();
-                        cout << endl << "Press enter to continue." << endl;
-                        break;
                     }
-
-                    cout << endl << "Destiny:" << endl
-                         << "1. Airport name/code or city name" << endl
-                         << "2. Coordinates" << endl;
-                    cin >> searchType;
-                    if (searchType == "1") {
-                        cout << endl << "Origin name: ";
-                        cin >> destiny;
-                    } else if (searchType == "2") {
-                        cout << "Enter latitude (in degrees): ";
-                        cin >> latitude;
-                        cout << endl << "Enter longitude (in degrees): ";
-                        cin >> longitude;
-                        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
-                            cout << endl << "Invalid coordinates." << endl;
-                            cout << endl << "The airport with the most number of related flights is " << f.getName();
-                            cout << endl << "Press enter to continue." << endl;
-                            break;
+                    cout << endl << "How many airports do you want to select? (use 0 if you don't want to filter airports): ";
+                    cin >> n;
+                    if (n > 0) {
+                        cout << endl << "Enter the name or code of the airports you want to select: " << endl;
+                        for (int i = 0; i < n; i++) {
+                            cin >> tempCode;
+                            airports.push_back(tempCode);
                         }
-                        coordinates[2] = latitude;
-                        coordinates[3] = longitude;
-                    } else {
-                        cout << endl << "The airport with the most number of related flights is " << f.getName();
-                        cout << endl << "Press enter to continue." << endl;
-                        break;
                     }
-
-                    vector<vector<Flight>> flights = _worldGraph.bestFlightAirport(origin, destiny, coordinates);
-                    cout << flights.size() << endl;
-                    for (auto v : flights) {
-                        for (auto flight : v) {
-                            cout << "From: " << flight.getSource() << " To: " << flight.getTarget() << " Airline: " << flight.getAirline() << endl;
-                        }
-                        cout << endl;
-                    }
-
-                } else if (filters == "Y" || filters == "y") {
-                    cout << endl << "TODO" << endl;
-                } else {
+                } else if (filters != "N" && filters != "n") {
                     cout << endl << "Invalid option" << endl;
+                    cout << endl << "Press enter to continue." << endl;
+                    cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+                    cin.get();
+                    break;
+                }
+                cout << endl << "Origin:" << endl
+                     << "1. Airport name/code or city name" << endl
+                     << "2. Coordinates" << endl;
+                cin >> searchType;
+                if (searchType == "1") {
+                    cout << endl << "Origin name: ";
+                    cin >> origin;
+                    airports.push_back(origin);
+                } else if (searchType == "2") {
+                    cout << "Enter latitude (in degrees): ";
+                    cin >> latitude;
+                    cout << endl << "Enter longitude (in degrees): ";
+                    cin >> longitude;
+                    if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+                        cout << endl << "Invalid coordinates." << endl;
+                        cout << endl << "The airport with the most number of related flights is " << f.getName();
+                        cout << endl << "Press enter to continue." << endl;
+                        break;
+                    }
+                    coordinates[0] = latitude;
+                    coordinates[1] = longitude;
+                } else {
+                    cout << endl << "The airport with the most number of related flights is " << f.getName();
+                    cout << endl << "Press enter to continue." << endl;
+                    break;
+                }
+
+                cout << endl << "Destiny:" << endl
+                     << "1. Airport name/code or city name" << endl
+                     << "2. Coordinates" << endl;
+                cin >> searchType;
+                if (searchType == "1") {
+                    cout << endl << "Origin name: ";
+                    cin >> destiny;
+                    airports.push_back(destiny);
+                } else if (searchType == "2") {
+                    cout << "Enter latitude (in degrees): ";
+                    cin >> latitude;
+                    cout << endl << "Enter longitude (in degrees): ";
+                    cin >> longitude;
+                    if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+                        cout << endl << "Invalid coordinates." << endl;
+                        cout << endl << "The airport with the most number of related flights is " << f.getName();
+                        cout << endl << "Press enter to continue." << endl;
+                        break;
+                    }
+                    coordinates[2] = latitude;
+                    coordinates[3] = longitude;
+                } else {
+                    cout << endl << "The airport with the most number of related flights is " << f.getName();
+                    cout << endl << "Press enter to continue." << endl;
+                    break;
+                }
+                vector<vector<Flight>> flights;
+                if (filters == "N" || filters == "n") flights = _worldGraph.bestFlightAirport(origin, destiny, coordinates);
+                else flights = _worldGraph.bestFlightAirport(origin, destiny, coordinates, airlines, airports, maxAirlines);
+                for (auto v : flights) {
+                    for (auto flight : v) {
+                        cout << "From: " << flight.getSource() << " To: " << flight.getTarget() << " Airline: " << flight.getAirline() << endl;
+                    }
+                    cout << endl;
                 }
                 cout << endl << "Press enter to continue." << endl;
                 cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
