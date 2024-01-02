@@ -1,0 +1,62 @@
+\doxysection{World\+Graph\+Manager.\+h}
+\hypertarget{_world_graph_manager_8h_source}{}\label{_world_graph_manager_8h_source}\index{src/WorldGraphManager.h@{src/WorldGraphManager.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}FileManager.h"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Graph.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Airport.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Airline.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Flight.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ AED\_PROJ\_2\_WORLDGRAPH\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ AED\_PROJ\_2\_WORLDGRAPH\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_world_graph_manager}{WorldGraphManager}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_file_manager}{FileManager}}\ \_vectors;}
+\DoxyCodeLine{00019\ \ \ \ \ vector<Airline>\ \_airlines;}
+\DoxyCodeLine{00020\ \ \ \ \ vector<Flight>\ \_flights;}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_graph}{Graph<Airport>}}\ \_world;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_world_graph_manager_acb2e85c0e25d57b4716ae840ce53d810}{WorldGraphManager}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_world_graph_manager_aef7a04de44f85ade2d38e544bde1a9bb}{makeAirports}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_world_graph_manager_a01f7e07474d278653c3248172a45756b}{makeAirlines}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_world_graph_manager_af7e33c999eef33dc501e29e4e9a7fa21}{makeFlights}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_world_graph_manager_a6bd3fe4a10f4195c6081ae9106f9a43d}{addFlights}}();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex<Airport>}}*\ \mbox{\hyperlink{class_world_graph_manager_a4df542f190fe2390143fc1454df15673}{airportFinder}}(\textcolor{keywordtype}{string}\ code);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_world_graph_manager_a8b206f5489ddf530c6a942194fbfad85}{numberOfAirports}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_world_graph_manager_a9f2479819132da2a1ae76f59430d1e88}{numberOfFlights}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ pair<int,\ int>\ \mbox{\hyperlink{class_world_graph_manager_af17129982162c3271fc05616996a5377}{numberOfFlightsInAirport}}(\textcolor{keywordtype}{string}\ source);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ vector<pair<string,\ int>>\ \mbox{\hyperlink{class_world_graph_manager_a2c5b4d1d663cc1f96cca725141ca4e32}{numberOfFlightsPerCity}}();}
+\DoxyCodeLine{00039\ \ \ \ \ vector<pair<string,\ int>>\ \mbox{\hyperlink{class_world_graph_manager_a779553644eebaaa2112a729263d3faea}{numberOfFlightsPerAirline}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_world_graph_manager_acc5941515740265777b1e55a730888be}{numberOfCountriesAirport}}(\textcolor{keywordtype}{string}\ source);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_world_graph_manager_ae4ef7c3ea8812c993581dff8f7d7690a}{numberOfCountriesCity}}(\textcolor{keywordtype}{string}\ source);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_world_graph_manager_a34628b28818ef84d138df41f28384567}{numberOfAirportsAirport}}(\textcolor{keywordtype}{string}\ source);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_world_graph_manager_ad91faecf07a855a05949ff9f8d0293d3}{numberOfCitiesAirport}}(\textcolor{keywordtype}{string}\ source);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_world_graph_manager_a367e835333513e882e53d9c9d8ebb367}{numberOfAirportsAtX}}(\textcolor{keywordtype}{string}\ source,\ \textcolor{keywordtype}{int}\ distance);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ vector<pair<Airport,\ Airport>>\ findLongestTrips();}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_airport}{Airport}}\ \mbox{\hyperlink{class_world_graph_manager_a1920186252b2d4bcee3c04c069051e45}{findTopKAirport}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ vector<vector<Flight>>\ \mbox{\hyperlink{class_world_graph_manager_a58e6ffb0b374061941f80ab95cd00c40}{bestFlightAirport}}(\textcolor{keywordtype}{string}\ origin,\ \textcolor{keywordtype}{string}\ destination,\ vector<float>\ coordenades);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ vector<vector<Flight>>}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{class_world_graph_manager_a58e6ffb0b374061941f80ab95cd00c40}{bestFlightAirport}}(\textcolor{keywordtype}{string}\ origin,\ \textcolor{keywordtype}{string}\ destination,\ vector<float>\ coordinates,\ vector<string>\ airlines,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vector<string>\ airports,\ \textcolor{keywordtype}{int}\ maxAirlines);}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//AED\_PROJ\_2\_WORLDGRAPH\_H}}
+
+\end{DoxyCode}

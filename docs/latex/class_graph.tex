@@ -1,0 +1,55 @@
+\doxysection{Graph\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_graph}{}\label{class_graph}\index{Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_graph_a8b7b7465fbfd562e2a469f90a437ab75}\label{class_graph_a8b7b7465fbfd562e2a469f90a437ab75} 
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} {\bfseries find\+Vertex} (const T \&in) const
+\item 
+\Hypertarget{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71}\label{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71} 
+int {\bfseries get\+Num\+Vertex} () const
+\item 
+\Hypertarget{class_graph_a00be284ea2be3b3d0f0d2e493b70245b}\label{class_graph_a00be284ea2be3b3d0f0d2e493b70245b} 
+bool {\bfseries add\+Vertex} (const T \&in)
+\item 
+\Hypertarget{class_graph_af9c903104ad69a7782979fa9caedf163}\label{class_graph_af9c903104ad69a7782979fa9caedf163} 
+bool {\bfseries remove\+Vertex} (const T \&in)
+\item 
+\Hypertarget{class_graph_a4b6ea6af0a82e7d4ba02e188679864e8}\label{class_graph_a4b6ea6af0a82e7d4ba02e188679864e8} 
+bool {\bfseries add\+Edge} (const T \&sourc, const T \&dest, double w, string airl)
+\item 
+\Hypertarget{class_graph_a1106092a37366486cf55576f9ec01692}\label{class_graph_a1106092a37366486cf55576f9ec01692} 
+bool {\bfseries remove\+Edge} (const T \&sourc, const T \&dest)
+\item 
+\Hypertarget{class_graph_a923b43995f81ad9319bbc81a1e433e64}\label{class_graph_a923b43995f81ad9319bbc81a1e433e64} 
+vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*} $>$ {\bfseries get\+Vertex\+Set} () const
+\item 
+\Hypertarget{class_graph_a911798b1a89f8c4ae90ba3eee849cff8}\label{class_graph_a911798b1a89f8c4ae90ba3eee849cff8} 
+vector$<$ T $>$ {\bfseries dfs} () const
+\item 
+\Hypertarget{class_graph_a510522c8221b321a82e687fe2f2cb484}\label{class_graph_a510522c8221b321a82e687fe2f2cb484} 
+vector$<$ T $>$ {\bfseries dfs} (const T \&source) const
+\item 
+\Hypertarget{class_graph_aa47a4130165550e208e7a063fce6983a}\label{class_graph_aa47a4130165550e208e7a063fce6983a} 
+vector$<$ T $>$ {\bfseries bfs} (const T \&source) const
+\item 
+\Hypertarget{class_graph_af1d4affd1f886bf598d0f4cf4a0cb7cb}\label{class_graph_af1d4affd1f886bf598d0f4cf4a0cb7cb} 
+vector$<$ T $>$ {\bfseries topsort} () const
+\item 
+\Hypertarget{class_graph_a1ea1512afe5ab878301bc806c2eba9d2}\label{class_graph_a1ea1512afe5ab878301bc806c2eba9d2} 
+bool {\bfseries is\+DAG} () const
+\item 
+\Hypertarget{class_graph_a3e2331b499e8ed945d6ae4798723242b}\label{class_graph_a3e2331b499e8ed945d6ae4798723242b} 
+vector$<$ vector$<$ \mbox{\hyperlink{struct_connection}{Connection}}$<$ T $>$ $>$ $>$ {\bfseries multi\+Bfs} (vector$<$ T $>$ sources, vector$<$ T $>$ destinations, int max\+Airlines) const
+\item 
+\Hypertarget{class_graph_a7c64c89d875832b7a4674dad0b9c89b0}\label{class_graph_a7c64c89d875832b7a4674dad0b9c89b0} 
+vector$<$ vector$<$ \mbox{\hyperlink{struct_connection}{Connection}}$<$ T $>$ $>$ $>$ {\bfseries find\+All\+Shortest\+Paths} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*}source, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \texorpdfstring{$\ast$}{*}destination, int max\+Airlines) const
+\item 
+\Hypertarget{class_graph_a384848b2540c6d52b156d697d951d7cd}\label{class_graph_a384848b2540c6d52b156d697d951d7cd} 
+\mbox{\hyperlink{class_graph}{Graph}}$<$ T $>$ \texorpdfstring{$\ast$}{*} {\bfseries clone\+Graph} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/Graph.\+h\end{DoxyCompactItemize}

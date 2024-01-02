@@ -1,0 +1,336 @@
+\doxysection{World\+Graph\+Manager Class Reference}
+\hypertarget{class_world_graph_manager}{}\label{class_world_graph_manager}\index{WorldGraphManager@{WorldGraphManager}}
+
+
+Class responsible for creating and managing a world graph that represents airports, airlines, and flights. It is responsible for working with the \doxylink{class_file_manager}{File\+Manager} to parse data and store it in the class\textquotesingle{}s respective fields After parsing the data, the class is responsbile for providing various functions to query and manipulate data related to airports, airlines and flights.  
+
+
+
+
+{\ttfamily \#include $<$World\+Graph\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_world_graph_manager_acb2e85c0e25d57b4716ae840ce53d810}{World\+Graph\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_world_graph_manager}{World\+Graph\+Manager} class Initializes the \doxylink{class_world_graph_manager}{World\+Graph\+Manager} by creating airports, airlines, and flights. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_world_graph_manager_aef7a04de44f85ade2d38e544bde1a9bb}{make\+Airports}} ()
+\begin{DoxyCompactList}\small\item\em Creates airports from the airports file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_world_graph_manager_a01f7e07474d278653c3248172a45756b}{make\+Airlines}} ()
+\begin{DoxyCompactList}\small\item\em Creates airlines from the airlines file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_world_graph_manager_af7e33c999eef33dc501e29e4e9a7fa21}{make\+Flights}} ()
+\begin{DoxyCompactList}\small\item\em Creates flights from the flights file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_world_graph_manager_a6bd3fe4a10f4195c6081ae9106f9a43d}{add\+Flights}} ()
+\begin{DoxyCompactList}\small\item\em Adds flights to the world graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_world_graph_manager_a4df542f190fe2390143fc1454df15673}{airport\+Finder}} (string code)
+\begin{DoxyCompactList}\small\item\em Returns the vertex corresponding to a given airport code. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_world_graph_manager_a8b206f5489ddf530c6a942194fbfad85}{number\+Of\+Airports}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of airports in the world graph. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_world_graph_manager_a9f2479819132da2a1ae76f59430d1e88}{number\+Of\+Flights}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of flights in the world graph. \end{DoxyCompactList}\item 
+pair$<$ int, int $>$ \mbox{\hyperlink{class_world_graph_manager_af17129982162c3271fc05616996a5377}{number\+Of\+Flights\+In\+Airport}} (string source)
+\begin{DoxyCompactList}\small\item\em Returns the number of flights and airlines in a given airport. \end{DoxyCompactList}\item 
+vector$<$ pair$<$ string, int $>$ $>$ \mbox{\hyperlink{class_world_graph_manager_a2c5b4d1d663cc1f96cca725141ca4e32}{number\+Of\+Flights\+Per\+City}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of flights per city. \end{DoxyCompactList}\item 
+vector$<$ pair$<$ string, int $>$ $>$ \mbox{\hyperlink{class_world_graph_manager_a779553644eebaaa2112a729263d3faea}{number\+Of\+Flights\+Per\+Airline}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of flights per airline. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_world_graph_manager_acc5941515740265777b1e55a730888be}{number\+Of\+Countries\+Airport}} (string source)
+\begin{DoxyCompactList}\small\item\em Returns the number of countries an airport has flights to. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_world_graph_manager_ae4ef7c3ea8812c993581dff8f7d7690a}{number\+Of\+Countries\+City}} (string source)
+\begin{DoxyCompactList}\small\item\em Returns the number of countries a city has flights to. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_world_graph_manager_a34628b28818ef84d138df41f28384567}{number\+Of\+Airports\+Airport}} (string source)
+\begin{DoxyCompactList}\small\item\em Returns the number of airports an airport has flights to. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_world_graph_manager_ad91faecf07a855a05949ff9f8d0293d3}{number\+Of\+Cities\+Airport}} (string source)
+\begin{DoxyCompactList}\small\item\em Returns the number of cities an airport has flights to. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_world_graph_manager_a367e835333513e882e53d9c9d8ebb367}{number\+Of\+Airports\+AtX}} (string source, int distance)
+\begin{DoxyCompactList}\small\item\em Returns the number of airports within a certain distance from a given airport. \end{DoxyCompactList}\item 
+\Hypertarget{class_world_graph_manager_ac31a1f9fb60bc9a24f0b926ac0d605fb}\label{class_world_graph_manager_ac31a1f9fb60bc9a24f0b926ac0d605fb} 
+vector$<$ pair$<$ \mbox{\hyperlink{class_airport}{Airport}}, \mbox{\hyperlink{class_airport}{Airport}} $>$ $>$ {\bfseries find\+Longest\+Trips} ()
+\item 
+\mbox{\hyperlink{class_airport}{Airport}} \mbox{\hyperlink{class_world_graph_manager_a1920186252b2d4bcee3c04c069051e45}{find\+Top\+KAirport}} ()
+\begin{DoxyCompactList}\small\item\em Returns the airport with the most flights. \end{DoxyCompactList}\item 
+vector$<$ vector$<$ \mbox{\hyperlink{class_flight}{Flight}} $>$ $>$ \mbox{\hyperlink{class_world_graph_manager_a58e6ffb0b374061941f80ab95cd00c40}{best\+Flight\+Airport}} (string origin, string destination, vector$<$ float $>$ coordenades)
+\begin{DoxyCompactList}\small\item\em Finds the best flights between the given origin and destination. \end{DoxyCompactList}\item 
+\Hypertarget{class_world_graph_manager_a2eafdf86e69c527f80294f28d242e792}\label{class_world_graph_manager_a2eafdf86e69c527f80294f28d242e792} 
+vector$<$ vector$<$ \mbox{\hyperlink{class_flight}{Flight}} $>$ $>$ {\bfseries best\+Flight\+Airport} (string origin, string destination, vector$<$ float $>$ coordinates, vector$<$ string $>$ airlines, vector$<$ string $>$ airports, int max\+Airlines)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class responsible for creating and managing a world graph that represents airports, airlines, and flights. It is responsible for working with the \doxylink{class_file_manager}{File\+Manager} to parse data and store it in the class\textquotesingle{}s respective fields After parsing the data, the class is responsbile for providing various functions to query and manipulate data related to airports, airlines and flights. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_world_graph_manager_acb2e85c0e25d57b4716ae840ce53d810}\label{class_world_graph_manager_acb2e85c0e25d57b4716ae840ce53d810} 
+\index{WorldGraphManager@{WorldGraphManager}!WorldGraphManager@{WorldGraphManager}}
+\index{WorldGraphManager@{WorldGraphManager}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{WorldGraphManager()}{WorldGraphManager()}}
+{\footnotesize\ttfamily World\+Graph\+Manager\+::\+World\+Graph\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor for the \doxylink{class_world_graph_manager}{World\+Graph\+Manager} class Initializes the \doxylink{class_world_graph_manager}{World\+Graph\+Manager} by creating airports, airlines, and flights. 
+
+Time complexity O(n) where n is the maximum size of the airports, airlines, and flights files 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_world_graph_manager_a6bd3fe4a10f4195c6081ae9106f9a43d}\label{class_world_graph_manager_a6bd3fe4a10f4195c6081ae9106f9a43d} 
+\index{WorldGraphManager@{WorldGraphManager}!addFlights@{addFlights}}
+\index{addFlights@{addFlights}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{addFlights()}{addFlights()}}
+{\footnotesize\ttfamily void World\+Graph\+Manager\+::add\+Flights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Adds flights to the world graph. 
+
+Time complexity O(n) where n is the number of flights \Hypertarget{class_world_graph_manager_a4df542f190fe2390143fc1454df15673}\label{class_world_graph_manager_a4df542f190fe2390143fc1454df15673} 
+\index{WorldGraphManager@{WorldGraphManager}!airportFinder@{airportFinder}}
+\index{airportFinder@{airportFinder}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{airportFinder()}{airportFinder()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_airport}{Airport}} $>$ \texorpdfstring{$\ast$}{*} World\+Graph\+Manager\+::airport\+Finder (\begin{DoxyParamCaption}\item[{string}]{code }\end{DoxyParamCaption})}
+
+
+
+Returns the vertex corresponding to a given airport code. 
+
+Time complexity O(n) where n is the number of airports 
+\begin{DoxyParams}{Parameters}
+{\em code} & The airport code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The vertex corresponding to the given airport code 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_a58e6ffb0b374061941f80ab95cd00c40}\label{class_world_graph_manager_a58e6ffb0b374061941f80ab95cd00c40} 
+\index{WorldGraphManager@{WorldGraphManager}!bestFlightAirport@{bestFlightAirport}}
+\index{bestFlightAirport@{bestFlightAirport}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{bestFlightAirport()}{bestFlightAirport()}}
+{\footnotesize\ttfamily vector$<$ vector$<$ \mbox{\hyperlink{class_flight}{Flight}} $>$ $>$ World\+Graph\+Manager\+::best\+Flight\+Airport (\begin{DoxyParamCaption}\item[{string}]{origin,  }\item[{string}]{destination,  }\item[{vector$<$ float $>$}]{coordinates }\end{DoxyParamCaption})}
+
+
+
+Finds the best flights between the given origin and destination. 
+
+Time complexity\+: O(n), where n is the number of airports in the graph. 
+\begin{DoxyParams}{Parameters}
+{\em origin} & The origin airport code, name, or city \\
+\hline
+{\em destination} & The destination airport code, name, or city \\
+\hline
+{\em coordinates} & The coordinates of the origin and destination (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of vectors of flights, where each inner vector represents a possible flight path 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_a1920186252b2d4bcee3c04c069051e45}\label{class_world_graph_manager_a1920186252b2d4bcee3c04c069051e45} 
+\index{WorldGraphManager@{WorldGraphManager}!findTopKAirport@{findTopKAirport}}
+\index{findTopKAirport@{findTopKAirport}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{findTopKAirport()}{findTopKAirport()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_airport}{Airport}} World\+Graph\+Manager\+::find\+Top\+KAirport (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the airport with the most flights. 
+
+Time complexity O(n\texorpdfstring{$^\wedge$}{\string^}2), where n is the number of airports \begin{DoxyReturn}{Returns}
+The airport with the most flights 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_a01f7e07474d278653c3248172a45756b}\label{class_world_graph_manager_a01f7e07474d278653c3248172a45756b} 
+\index{WorldGraphManager@{WorldGraphManager}!makeAirlines@{makeAirlines}}
+\index{makeAirlines@{makeAirlines}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{makeAirlines()}{makeAirlines()}}
+{\footnotesize\ttfamily void World\+Graph\+Manager\+::make\+Airlines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Creates airlines from the airlines file. 
+
+Time complexity O(n) where n is the size of the airports file \Hypertarget{class_world_graph_manager_aef7a04de44f85ade2d38e544bde1a9bb}\label{class_world_graph_manager_aef7a04de44f85ade2d38e544bde1a9bb} 
+\index{WorldGraphManager@{WorldGraphManager}!makeAirports@{makeAirports}}
+\index{makeAirports@{makeAirports}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{makeAirports()}{makeAirports()}}
+{\footnotesize\ttfamily void World\+Graph\+Manager\+::make\+Airports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Creates airports from the airports file. 
+
+Time complexity O(n) where n is the size of the airports file \Hypertarget{class_world_graph_manager_af7e33c999eef33dc501e29e4e9a7fa21}\label{class_world_graph_manager_af7e33c999eef33dc501e29e4e9a7fa21} 
+\index{WorldGraphManager@{WorldGraphManager}!makeFlights@{makeFlights}}
+\index{makeFlights@{makeFlights}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{makeFlights()}{makeFlights()}}
+{\footnotesize\ttfamily void World\+Graph\+Manager\+::make\+Flights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Creates flights from the flights file. 
+
+Time complexity O(n) where n is the size of the airports file \Hypertarget{class_world_graph_manager_a8b206f5489ddf530c6a942194fbfad85}\label{class_world_graph_manager_a8b206f5489ddf530c6a942194fbfad85} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfAirports@{numberOfAirports}}
+\index{numberOfAirports@{numberOfAirports}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfAirports()}{numberOfAirports()}}
+{\footnotesize\ttfamily int World\+Graph\+Manager\+::number\+Of\+Airports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the number of airports in the world graph. 
+
+Time complexity O(1) \begin{DoxyReturn}{Returns}
+Value that corresponds to the number of airports in the world graph 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_a34628b28818ef84d138df41f28384567}\label{class_world_graph_manager_a34628b28818ef84d138df41f28384567} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfAirportsAirport@{numberOfAirportsAirport}}
+\index{numberOfAirportsAirport@{numberOfAirportsAirport}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfAirportsAirport()}{numberOfAirportsAirport()}}
+{\footnotesize\ttfamily int World\+Graph\+Manager\+::number\+Of\+Airports\+Airport (\begin{DoxyParamCaption}\item[{string}]{source }\end{DoxyParamCaption})}
+
+
+
+Returns the number of airports an airport has flights to. 
+
+Time complexity O(n) where n is the number of flights from the airport 
+\begin{DoxyParams}{Parameters}
+{\em source} & The airport code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of airports the airport has flights to 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_a367e835333513e882e53d9c9d8ebb367}\label{class_world_graph_manager_a367e835333513e882e53d9c9d8ebb367} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfAirportsAtX@{numberOfAirportsAtX}}
+\index{numberOfAirportsAtX@{numberOfAirportsAtX}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfAirportsAtX()}{numberOfAirportsAtX()}}
+{\footnotesize\ttfamily int World\+Graph\+Manager\+::number\+Of\+Airports\+AtX (\begin{DoxyParamCaption}\item[{string}]{source,  }\item[{int}]{distance }\end{DoxyParamCaption})}
+
+
+
+Returns the number of airports within a certain distance from a given airport. 
+
+Time complexity O(n) where n is the number of airports 
+\begin{DoxyParams}{Parameters}
+{\em source} & The airport code \\
+\hline
+{\em distance} & The distance in kilometers \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of airports within the given distance 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_ad91faecf07a855a05949ff9f8d0293d3}\label{class_world_graph_manager_ad91faecf07a855a05949ff9f8d0293d3} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfCitiesAirport@{numberOfCitiesAirport}}
+\index{numberOfCitiesAirport@{numberOfCitiesAirport}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfCitiesAirport()}{numberOfCitiesAirport()}}
+{\footnotesize\ttfamily int World\+Graph\+Manager\+::number\+Of\+Cities\+Airport (\begin{DoxyParamCaption}\item[{string}]{source }\end{DoxyParamCaption})}
+
+
+
+Returns the number of cities an airport has flights to. 
+
+Time complexity O(n) where n is the number of flights from the airport 
+\begin{DoxyParams}{Parameters}
+{\em source} & The airport code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of cities the airport has flights to 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_acc5941515740265777b1e55a730888be}\label{class_world_graph_manager_acc5941515740265777b1e55a730888be} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfCountriesAirport@{numberOfCountriesAirport}}
+\index{numberOfCountriesAirport@{numberOfCountriesAirport}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfCountriesAirport()}{numberOfCountriesAirport()}}
+{\footnotesize\ttfamily int World\+Graph\+Manager\+::number\+Of\+Countries\+Airport (\begin{DoxyParamCaption}\item[{string}]{source }\end{DoxyParamCaption})}
+
+
+
+Returns the number of countries an airport has flights to. 
+
+Time complexity O(n) where n is the number of flights from the airport 
+\begin{DoxyParams}{Parameters}
+{\em source} & The airport code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of countries the airport has flights to 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_ae4ef7c3ea8812c993581dff8f7d7690a}\label{class_world_graph_manager_ae4ef7c3ea8812c993581dff8f7d7690a} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfCountriesCity@{numberOfCountriesCity}}
+\index{numberOfCountriesCity@{numberOfCountriesCity}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfCountriesCity()}{numberOfCountriesCity()}}
+{\footnotesize\ttfamily int World\+Graph\+Manager\+::number\+Of\+Countries\+City (\begin{DoxyParamCaption}\item[{string}]{source }\end{DoxyParamCaption})}
+
+
+
+Returns the number of countries a city has flights to. 
+
+Time complexity O(n\texorpdfstring{$^\wedge$}{\string^}2) where n is the number of airports 
+\begin{DoxyParams}{Parameters}
+{\em source} & The city name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of countries the city has flights to 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_a9f2479819132da2a1ae76f59430d1e88}\label{class_world_graph_manager_a9f2479819132da2a1ae76f59430d1e88} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfFlights@{numberOfFlights}}
+\index{numberOfFlights@{numberOfFlights}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfFlights()}{numberOfFlights()}}
+{\footnotesize\ttfamily int World\+Graph\+Manager\+::number\+Of\+Flights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the number of flights in the world graph. 
+
+Time complexity O(n) where n is the number of airports \begin{DoxyReturn}{Returns}
+value that corresponds to the number of airports in the world graph 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_af17129982162c3271fc05616996a5377}\label{class_world_graph_manager_af17129982162c3271fc05616996a5377} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfFlightsInAirport@{numberOfFlightsInAirport}}
+\index{numberOfFlightsInAirport@{numberOfFlightsInAirport}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfFlightsInAirport()}{numberOfFlightsInAirport()}}
+{\footnotesize\ttfamily pair$<$ int, int $>$ World\+Graph\+Manager\+::number\+Of\+Flights\+In\+Airport (\begin{DoxyParamCaption}\item[{string}]{source }\end{DoxyParamCaption})}
+
+
+
+Returns the number of flights and airlines in a given airport. 
+
+Time complexity O(n) where n is the number of flights in the airport 
+\begin{DoxyParams}{Parameters}
+{\em source} & The airport code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair where the first element is the number of flights and the second element is the number of airlines 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_a779553644eebaaa2112a729263d3faea}\label{class_world_graph_manager_a779553644eebaaa2112a729263d3faea} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfFlightsPerAirline@{numberOfFlightsPerAirline}}
+\index{numberOfFlightsPerAirline@{numberOfFlightsPerAirline}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfFlightsPerAirline()}{numberOfFlightsPerAirline()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ string, int $>$ $>$ World\+Graph\+Manager\+::number\+Of\+Flights\+Per\+Airline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the number of flights per airline. 
+
+Time complexity O(n) where n is the number of flights \begin{DoxyReturn}{Returns}
+A vector of pairs where each pair contains an airline name and the number of flights by that airline 
+\end{DoxyReturn}
+\Hypertarget{class_world_graph_manager_a2c5b4d1d663cc1f96cca725141ca4e32}\label{class_world_graph_manager_a2c5b4d1d663cc1f96cca725141ca4e32} 
+\index{WorldGraphManager@{WorldGraphManager}!numberOfFlightsPerCity@{numberOfFlightsPerCity}}
+\index{numberOfFlightsPerCity@{numberOfFlightsPerCity}!WorldGraphManager@{WorldGraphManager}}
+\doxysubsubsection{\texorpdfstring{numberOfFlightsPerCity()}{numberOfFlightsPerCity()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ string, int $>$ $>$ World\+Graph\+Manager\+::number\+Of\+Flights\+Per\+City (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the number of flights per city. 
+
+Time complexity O(n\texorpdfstring{$^\wedge$}{\string^}2) where n is the number of airports \begin{DoxyReturn}{Returns}
+A vector of pairs where each pair contains a city name and the number of flights from that city 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/World\+Graph\+Manager.\+h\item 
+src/World\+Graph\+Manager.\+cpp\end{DoxyCompactItemize}

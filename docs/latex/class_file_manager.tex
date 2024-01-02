@@ -1,0 +1,157 @@
+\doxysection{File\+Manager Class Reference}
+\hypertarget{class_file_manager}{}\label{class_file_manager}\index{FileManager@{FileManager}}
+
+
+Class that handles data parsing for the airport data Has the collection of airlines, airports and flights.  
+
+
+
+
+{\ttfamily \#include $<$File\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_file_manager_a8afd512c06be9daf140cc19d71f9b391}{File\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_file_manager}{File\+Manager}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_file_manager_af1328e30ac5f6666f7b7b40f762a32e0}{set\+Airports\+File}} (vector$<$ string $>$ airportsfile)
+\begin{DoxyCompactList}\small\item\em Setter function for \+\_\+airportsfile field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_file_manager_a6d63ae57dba385f1f4cc4151b3924839}{set\+Airlines\+File}} (vector$<$ string $>$ airlinesfile)
+\begin{DoxyCompactList}\small\item\em Setter function for \+\_\+airlinesfile field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_file_manager_a5c515e311b98721f69cc1db196b172b6}{set\+Flights\+File}} (vector$<$ string $>$ flightsfile)
+\begin{DoxyCompactList}\small\item\em Setter function for \+\_\+flightsfile field. \end{DoxyCompactList}\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_file_manager_aa67ad40bc25d1a69cf0d31543bbd06e0}{get\+Airports\+File}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for \+\_\+airportsfile field. \end{DoxyCompactList}\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_file_manager_a9691bc65e69a27d553f48eee480a1a28}{get\+Airlines\+File}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for \+\_\+airlinesfile field. \end{DoxyCompactList}\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_file_manager_a3320f871e79dfbc612ce261506469cb9}{get\+Flights\+File}} ()
+\begin{DoxyCompactList}\small\item\em Getter function for \+\_\+flightsfile field. \end{DoxyCompactList}\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_file_manager_a74e2199b074ab15b6925958c217a164c}{file\+To\+Vector}} (string filename)
+\begin{DoxyCompactList}\small\item\em Turns the information in the .csv files into a vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that handles data parsing for the airport data Has the collection of airlines, airports and flights. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_file_manager_a8afd512c06be9daf140cc19d71f9b391}\label{class_file_manager_a8afd512c06be9daf140cc19d71f9b391} 
+\index{FileManager@{FileManager}!FileManager@{FileManager}}
+\index{FileManager@{FileManager}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{FileManager()}{FileManager()}}
+{\footnotesize\ttfamily File\+Manager\+::\+File\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor for \doxylink{class_file_manager}{File\+Manager}. 
+
+Time complexity O(1) 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_file_manager_a74e2199b074ab15b6925958c217a164c}\label{class_file_manager_a74e2199b074ab15b6925958c217a164c} 
+\index{FileManager@{FileManager}!fileToVector@{fileToVector}}
+\index{fileToVector@{fileToVector}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{fileToVector()}{fileToVector()}}
+{\footnotesize\ttfamily vector$<$ string $>$ File\+Manager\+::file\+To\+Vector (\begin{DoxyParamCaption}\item[{string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Turns the information in the .csv files into a vector. 
+
+Time complexity O(n) with n being the amount of lines in the file. Gets called at the start of run() in \doxylink{class_app}{App}. All strings separated by a comma or by a new line are all a member in the vector 
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the .csv file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+res, which is the file\textquotesingle{}s data parsed into a vector 
+\end{DoxyReturn}
+\Hypertarget{class_file_manager_a9691bc65e69a27d553f48eee480a1a28}\label{class_file_manager_a9691bc65e69a27d553f48eee480a1a28} 
+\index{FileManager@{FileManager}!getAirlinesFile@{getAirlinesFile}}
+\index{getAirlinesFile@{getAirlinesFile}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{getAirlinesFile()}{getAirlinesFile()}}
+{\footnotesize\ttfamily vector$<$ string $>$ File\+Manager\+::get\+Airlines\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter function for \+\_\+airlinesfile field. 
+
+Time complexity O(1) \begin{DoxyReturn}{Returns}
+\+\_\+airlinesfile 
+\end{DoxyReturn}
+\Hypertarget{class_file_manager_aa67ad40bc25d1a69cf0d31543bbd06e0}\label{class_file_manager_aa67ad40bc25d1a69cf0d31543bbd06e0} 
+\index{FileManager@{FileManager}!getAirportsFile@{getAirportsFile}}
+\index{getAirportsFile@{getAirportsFile}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{getAirportsFile()}{getAirportsFile()}}
+{\footnotesize\ttfamily vector$<$ string $>$ File\+Manager\+::get\+Airports\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter function for \+\_\+airportsfile field. 
+
+Time complexity O(1) \begin{DoxyReturn}{Returns}
+\+\_\+airportsfile 
+\end{DoxyReturn}
+\Hypertarget{class_file_manager_a3320f871e79dfbc612ce261506469cb9}\label{class_file_manager_a3320f871e79dfbc612ce261506469cb9} 
+\index{FileManager@{FileManager}!getFlightsFile@{getFlightsFile}}
+\index{getFlightsFile@{getFlightsFile}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{getFlightsFile()}{getFlightsFile()}}
+{\footnotesize\ttfamily vector$<$ string $>$ File\+Manager\+::get\+Flights\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter function for \+\_\+flightsfile field. 
+
+Time complexity O(1) \begin{DoxyReturn}{Returns}
+\+\_\+flightsfile 
+\end{DoxyReturn}
+\Hypertarget{class_file_manager_a6d63ae57dba385f1f4cc4151b3924839}\label{class_file_manager_a6d63ae57dba385f1f4cc4151b3924839} 
+\index{FileManager@{FileManager}!setAirlinesFile@{setAirlinesFile}}
+\index{setAirlinesFile@{setAirlinesFile}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{setAirlinesFile()}{setAirlinesFile()}}
+{\footnotesize\ttfamily void File\+Manager\+::set\+Airlines\+File (\begin{DoxyParamCaption}\item[{vector$<$ string $>$}]{airlinesfile }\end{DoxyParamCaption})}
+
+
+
+Setter function for \+\_\+airlinesfile field. 
+
+Time complexity O(1) 
+\begin{DoxyParams}{Parameters}
+{\em airlinesfile} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_file_manager_af1328e30ac5f6666f7b7b40f762a32e0}\label{class_file_manager_af1328e30ac5f6666f7b7b40f762a32e0} 
+\index{FileManager@{FileManager}!setAirportsFile@{setAirportsFile}}
+\index{setAirportsFile@{setAirportsFile}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{setAirportsFile()}{setAirportsFile()}}
+{\footnotesize\ttfamily void File\+Manager\+::set\+Airports\+File (\begin{DoxyParamCaption}\item[{vector$<$ string $>$}]{airportsfile }\end{DoxyParamCaption})}
+
+
+
+Setter function for \+\_\+airportsfile field. 
+
+Time complexity O(1) 
+\begin{DoxyParams}{Parameters}
+{\em airportsfile} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_file_manager_a5c515e311b98721f69cc1db196b172b6}\label{class_file_manager_a5c515e311b98721f69cc1db196b172b6} 
+\index{FileManager@{FileManager}!setFlightsFile@{setFlightsFile}}
+\index{setFlightsFile@{setFlightsFile}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{setFlightsFile()}{setFlightsFile()}}
+{\footnotesize\ttfamily void File\+Manager\+::set\+Flights\+File (\begin{DoxyParamCaption}\item[{vector$<$ string $>$}]{flightsfile }\end{DoxyParamCaption})}
+
+
+
+Setter function for \+\_\+flightsfile field. 
+
+Time complexity O(1) 
+\begin{DoxyParams}{Parameters}
+{\em flightsfile} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/File\+Manager.\+h\item 
+src/File\+Manager.\+cpp\end{DoxyCompactItemize}
