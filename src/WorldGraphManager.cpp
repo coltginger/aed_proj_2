@@ -429,7 +429,98 @@ vector<vector<Flight>> WorldGraphManager::bestFlightAirport(string origin, strin
         }
     }
 
-    vector<vector<Connection<Airport>>> allFlights = _world.multiBfs(start, end);
+    if (start.empty() || end.empty()) return flights;
+
+    vector<vector<Connection<Airport>>> allFlights = _world.multiBfs(start, end, INT_MAX);
+
+    vector<Flight> tempFlights;
+    for (auto v1 : allFlights) {
+        for (auto v2 : v1) {
+            Flight tempFlight = Flight(v2.source.getCode(), v2.destination.getCode(), v2.airline);
+            tempFlights.push_back(tempFlight);
+        }
+        flights.push_back(tempFlights);
+        tempFlights.clear();
+    }
+
+    return flights;
+}
+
+vector<vector<Flight>> WorldGraphManager::bestFlightAirport(string origin, string destination, vector<float> coordinates, vector<string> airlines, vector<string> airports, int maxAirlines){
+    vector<vector<Flight>> flights;
+    vector<Airport> start, end;
+    double maxOrigin = INT_MAX, maxDest = INT_MAX;
+    bool originCoords = false, destCoords = false;
+    if (coordinates[0] != 200) originCoords = true;
+    if (coordinates[2] != 200) destCoords = true;
+    Graph<Airport> newGraph;
+
+    if (airports.empty()) {
+        for (auto v : _world.getVertexSet()) {
+            newGraph.addVertex(v->getInfo());
+        }
+    } else {
+        for (auto v: _world.getVertexSet()) {
+            if (find(airports.begin(), airports.end(), v->getInfo().getCode()) != airports.end() ||
+                find(airports.begin(), airports.end(), v->getInfo().getName()) != airports.end()) {
+                newGraph.addVertex(v->getInfo());
+            }
+        }
+    }
+
+    if (airlines.empty()) {
+        for (auto v: _world.getVertexSet()) {
+            if (newGraph.findVertex(v->getInfo()) != nullptr) { // Check if the vertex is in the new graph
+                for (auto e: v->getAdj()) {
+                    newGraph.addEdge(v->getInfo(), e.getDest()->getInfo(), e.getWeight(), e.getAirline());
+                }
+            }
+        }
+    } else {
+        for (auto v : _world.getVertexSet()) {
+            if (newGraph.findVertex(v->getInfo()) != nullptr) { // Check if the vertex is in the new graph
+                for (auto e : v->getAdj()) {
+                    if (find(airlines.begin(), airlines.end(), e.getAirline()) != airlines.end() &&
+                        newGraph.findVertex(e.getDest()->getInfo()) != nullptr) { // Check airline and destination vertex
+                        newGraph.addEdge(v->getInfo(), e.getDest()->getInfo(), e.getWeight(), e.getAirline());
+                    }
+                }
+            }
+        }
+    }
+
+    for (auto v : newGraph.getVertexSet()) {
+        if (!originCoords && (v->getInfo().getCode() == origin || v->getInfo().getName() == origin || v->getInfo().getCity() == origin)) {
+            start.push_back(v->getInfo());
+        }
+        if (!destCoords && (v->getInfo().getCode() == destination || v->getInfo().getName() == destination || v->getInfo().getCity() == destination)) {
+            end.push_back(v->getInfo());
+        }
+        if (originCoords) {
+            double tempDist = v->getInfo().getDistance(coordinates[0], coordinates[1]);
+            if (tempDist < maxOrigin) {
+                maxOrigin = tempDist;
+                start.clear();
+                start.push_back(v->getInfo());
+            } else if (tempDist == maxOrigin) {
+                start.push_back(v->getInfo());
+            }
+        }
+        if (destCoords) {
+            double tempDist = v->getInfo().getDistance(coordinates[2], coordinates[3]);
+            if (tempDist < maxDest) {
+                maxDest = tempDist;
+                end.clear();
+                end.push_back(v->getInfo());
+            } else if (tempDist == maxDest) {
+                end.push_back(v->getInfo());
+            }
+        }
+    }
+
+    if (start.empty() || end.empty()) return flights;
+
+    vector<vector<Connection<Airport>>> allFlights = newGraph.multiBfs(start, end, maxAirlines);
 
     vector<Flight> tempFlights;
     for (auto v1 : allFlights) {

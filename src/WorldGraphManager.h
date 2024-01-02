@@ -51,6 +51,10 @@ public:
     Airport findTopKAirport();
 
     vector<vector<Flight>> bestFlightAirport(string origin, string destination, vector<float> coordenades);
+
+    vector<vector<Flight>>
+    bestFlightAirport(string origin, string destination, vector<float> coordinates, vector<string> airlines,
+                      vector<string> airports, int maxAirlines);
 };
 
 

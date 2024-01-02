@@ -11,6 +11,8 @@
 #include <list>
 #include <map>
 #include <climits>
+#include <unordered_set>
+#include <utility>
 
 using namespace std;
 
@@ -114,12 +116,41 @@ public:
     bool isDAG() const;
 
 
-    vector<vector<Connection<T>>> multiBfs(vector<T> sources, vector<T> destinations) const;
+    vector<vector<Connection<T>>> multiBfs(vector<T> sources, vector<T> destinations, int maxAirlines) const;
 
-    vector<vector<Connection<T>>> findAllShortestPaths(Vertex<T> *source, Vertex<T> *destination) const;
+    vector<vector<Connection<T>>> findAllShortestPaths(Vertex<T> *source, Vertex<T> *destination, int maxAirlines) const;
+
+    Graph<T> *cloneGraph() const;
 };
 
 /****************** Provided constructors and functions ********************/
+
+template <class T>
+Graph<T>* Graph<T>::cloneGraph() const {
+    auto newGraph = new Graph<T>();
+
+    // Map to store the correspondence between original and new vertices
+    map<Vertex<T>*, Vertex<T>*> origToNewMap;
+
+    // Step 1: Clone vertices
+    for (Vertex<T>* origVertex : vertexSet) {
+        auto newVertex = new Vertex<T>(origVertex->info);
+        newGraph->addVertex(newVertex->info);
+        origToNewMap[origVertex] = newVertex;
+    }
+
+    // Step 2: Clone edges
+    for (Vertex<T>* origVertex : vertexSet) {
+        for (Edge<T>& edge : origVertex->adj) {
+            Vertex<T>* newFrom = origToNewMap[origVertex];
+            Vertex<T>* newTo = origToNewMap[edge.dest];
+            newGraph->addEdge(newFrom->info, newTo->info, edge.weight, edge.airline);
+        }
+    }
+
+    return newGraph;
+}
+
 
 template <class T>
 Vertex<T>::Vertex(T in): info(in) {}
@@ -437,7 +468,7 @@ vector<T> Graph<T>::bfs(const T & source) const {
  * BFS to search for the shortest path between two airports.
  */
 template <class T>
-vector<vector<Connection<T>>> Graph<T>::findAllShortestPaths(Vertex<T> *source, Vertex<T> *destination) const {
+vector<vector<Connection<T>>> Graph<T>::findAllShortestPaths(Vertex<T> *source, Vertex<T> *destination, int maxAirlines) const {
     vector<vector<Connection<T>>> allPaths;
     if (source == nullptr || destination == nullptr) return allPaths;
 
@@ -446,17 +477,16 @@ vector<vector<Connection<T>>> Graph<T>::findAllShortestPaths(Vertex<T> *source, 
         level[v] = -1;  // Initialize level for each vertex
     }
 
-    queue<vector<Connection<T>>> q;
-    q.push({});  // start with an empty path
+    queue<pair<vector<Connection<T>>, unordered_set<string>>> q;
+    q.push({{}, {}});  // start with an empty path and an empty set of airlines
     level[source] = 0;
 
     int shortestPathLength = INT_MAX;
 
     while (!q.empty()) {
-        auto path = q.front();
+        auto [path, airlinesUsed] = q.front();
         q.pop();
         Vertex<T>* lastVertex = path.empty() ? source : findVertex(path.back().destination);
-
 
         if (lastVertex == destination) {
             if (path.size() < shortestPathLength) {
@@ -472,14 +502,18 @@ vector<vector<Connection<T>>> Graph<T>::findAllShortestPaths(Vertex<T> *source, 
         for (auto &e : lastVertex->adj) {
             Vertex<T>* nextVertex = e.dest;
             if (level[nextVertex] == -1 || level[nextVertex] >= level[lastVertex] + 1) {
-                level[nextVertex] = level[lastVertex] + 1;
-                vector<Connection<T>> newPath(path);
-                Connection<T> conn;
-                conn.source = lastVertex->info;
-                conn.destination = nextVertex->info;
-                conn.airline = e.airline;
-                newPath.push_back(conn);
-                q.push(newPath);
+                unordered_set<string> airlinesUpdated(airlinesUsed);
+                airlinesUpdated.insert(e.airline);
+                if (airlinesUpdated.size() <= maxAirlines) {
+                    level[nextVertex] = level[lastVertex] + 1;
+                    vector<Connection<T>> newPath(path);
+                    Connection<T> conn;
+                    conn.source = lastVertex->info;
+                    conn.destination = nextVertex->info;
+                    conn.airline = e.airline;
+                    newPath.push_back(conn);
+                    q.push({newPath, airlinesUpdated});
+                }
             }
         }
     }
@@ -487,15 +521,16 @@ vector<vector<Connection<T>>> Graph<T>::findAllShortestPaths(Vertex<T> *source, 
     return allPaths;
 }
 
+
 template <class T>
-vector<vector<Connection<T>>> Graph<T>::multiBfs(vector<T> sources, vector<T> destinations) const {
+vector<vector<Connection<T>>> Graph<T>::multiBfs(vector<T> sources, vector<T> destinations, int maxAirlines) const {
     vector<vector<Connection<T>>> allPaths;
 
     for (int i = 0; i < sources.size(); i++) {
         auto sourceVertex = findVertex(sources[i]);
         for (int j = 0; j < destinations.size(); j++) {
             auto destinationVertex = findVertex(destinations[j]);
-            vector<vector<Connection<T>>> paths = findAllShortestPaths(sourceVertex, destinationVertex);
+            vector<vector<Connection<T>>> paths = findAllShortestPaths(sourceVertex, destinationVertex, maxAirlines);
 
             // Add the found paths to the overall list of paths
             for (const auto &path : paths) {
