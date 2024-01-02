@@ -88,10 +88,35 @@ float Airport::getLongitude() {
 }
 
 /**
+ * @brief Calculates the distance from this airport to the given coordinates
+ * @details Time complexity O(1)
+ * @param latitude The latitude of the location to calculate the distance to
+ * @param longitude The longitude of the location to calculate the distance to
+ * @return The distance in kilometers from this airport to the given coordinates
+ */
+double Airport::getDistance(float latitude, float longitude) {
+    double lat1 = _latitude * M_PI / 180.0;
+    double lon1 = _longitude * M_PI / 180.0;
+    double lat2 = latitude * M_PI / 180.0;
+    double lon2 = longitude * M_PI / 180.0;
+
+    double dLat = lat2 - lat1;
+    double dLon = lon2 - lon1;
+
+    double a = std::sin(dLat / 2) * std::sin(dLat / 2) +
+               std::cos(lat1) * std::cos(lat2) *
+               std::sin(dLon / 2) * std::sin(dLon / 2);
+
+    double c = 2 * std::atan2(std::sqrt(a), std::sqrt(1 - a));
+    double distance = EARTH_RADIUS_KM * c;
+    return distance;
+}
+
+/**
  * @brief Checks if two Airports match the exact same values
  * @details Time complexity O(1)
  * @param other
- * @return true if all attributes match
+ * @return True if all attributes match
  */
 bool Airport::operator==(const Airport &other) const {
     return _code == other._code &&

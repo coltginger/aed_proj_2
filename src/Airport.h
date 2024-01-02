@@ -1,8 +1,11 @@
 #include <string>
+#include <cmath>
 using namespace std;
 
 #ifndef AED_PROJ_2_AIRPORT_H
 #define AED_PROJ_2_AIRPORT_H
+
+const double EARTH_RADIUS_KM = 6371.0;
 
 /**
  * @brief Class to store information about a certain Airport, including its code, name, city, country, latitude and longitude
@@ -27,6 +30,7 @@ public:
     float getLongitude();
     bool operator==(const Airport& other) const;
 
+    double getDistance(float latitude, float longitude);
 };
 
 

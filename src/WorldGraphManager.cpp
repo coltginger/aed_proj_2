@@ -384,3 +384,54 @@ Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
     cin >> newsource;
     return airportFinder(newsource);
 }
+
+vector<vector<Flight>> WorldGraphManager::bestFlightAirport(string origin, string destination, vector<float> coordinates) {
+    vector<vector<Flight>> flights;
+    vector<Airport> start, end;
+    double maxOrigin = 99999, maxDest = 99999;
+    bool originCoords = false, destCoords = false;
+    if (coordinates[0] != 200) originCoords = true;
+    if (coordinates[2] != 200) destCoords = true;
+    for (auto v : _world.getVertexSet()) {
+        if (!originCoords && (v->getInfo().getCode() == origin || v->getInfo().getName() == origin || v->getInfo().getCity() == origin)) {
+            start.push_back(v->getInfo());
+        }
+        if (!destCoords && (v->getInfo().getCode() == destination || v->getInfo().getName() == destination || v->getInfo().getCity() == destination)) {
+            end.push_back(v->getInfo());
+        }
+        if (originCoords) {
+            double tempDist = v->getInfo().getDistance(coordinates[0], coordinates[1]);
+            if (tempDist < maxOrigin) {
+                maxOrigin = tempDist;
+                start.clear();
+                start.push_back(v->getInfo());
+            } else if (tempDist == maxOrigin) {
+                start.push_back(v->getInfo());
+            }
+        }
+        if (destCoords) {
+            double tempDist = v->getInfo().getDistance(coordinates[2], coordinates[3]);
+            if (tempDist < maxDest) {
+                maxDest = tempDist;
+                end.clear();
+                end.push_back(v->getInfo());
+            } else if (tempDist == maxDest) {
+                end.push_back(v->getInfo());
+            }
+        }
+    }
+
+    vector<vector<Connection<Airport>>> allFlights = _world.multiBfs(start, end);
+
+    vector<Flight> tempFlights;
+    for (auto v1 : allFlights) {
+        for (auto v2 : v1) {
+            Flight tempFlight = Flight(v2.source.getCode(), v2.destination.getCode(), v2.airline);
+            tempFlights.push_back(tempFlight);
+        }
+        flights.push_back(tempFlights);
+        tempFlights.clear();
+    }
+
+    return flights;
+}
