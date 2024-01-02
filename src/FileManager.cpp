@@ -72,7 +72,7 @@ vector<string> FileManager::getFlightsFile() {
  * @details Time complexity O(n) with n being the amount of lines in the file. Gets called at the start of run() in App.
  * All strings separated by a comma or by a new line are all a member in the vector
  * @param filename The name of the .csv file
- * @return res, which is the file in vector form
+ * @return res, which is the file's data parsed into a vector
  */
 vector<string> FileManager::fileToVector(std::string filename) {
     vector<string> res;

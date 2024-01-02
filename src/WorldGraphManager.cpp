@@ -90,7 +90,7 @@ void WorldGraphManager::addFlights() {
 /**
  * @brief Returns the number of airports in the world graph
  * @details Time complexity O(1)
- * @return value that corresponds to the number of airports in the world graph
+ * @return Value that corresponds to the number of airports in the world graph
  */
 int WorldGraphManager::numberOfAirports() {
     int res = _world.getNumVertex();
@@ -385,6 +385,14 @@ Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
     return airportFinder(newsource);
 }
 
+/**
+ * @brief Finds the best flights between the given origin and destination
+ * @details Time complexity: O(n), where n is the number of airports in the graph.
+ * @param origin The origin airport code, name, or city
+ * @param destination The destination airport code, name, or city
+ * @param coordinates The coordinates of the origin and destination (optional)
+ * @return A vector of vectors of flights, where each inner vector represents a possible flight path
+ */
 vector<vector<Flight>> WorldGraphManager::bestFlightAirport(string origin, string destination, vector<float> coordinates) {
     vector<vector<Flight>> flights;
     vector<Airport> start, end;
