@@ -446,6 +446,17 @@ vector<vector<Flight>> WorldGraphManager::bestFlightAirport(string origin, strin
     return flights;
 }
 
+/**
+ * @brief Finds the best flights between the given origin and destination with the sue of filters
+ * @details Time complexity: O(n), where n is the number of airports in the graph.
+ * @param origin The origin airport code, name, or city
+ * @param destination The destination airport code, name, or city
+ * @param coordinates The coordinates of the origin and destination (optional)
+ * @param airlines Vector with the selected airlines
+ * @param airports Vector with the selected airports
+ * @param maxAirlines Its the maximum amount of airlines that can be used in the connections
+ * @return A vector of vectors of flights, where each inner vector represents a possible flight path
+ */
 vector<vector<Flight>> WorldGraphManager::bestFlightAirport(string origin, string destination, vector<float> coordinates, vector<string> airlines, vector<string> airports, int maxAirlines){
     vector<vector<Flight>> flights;
     vector<Airport> start, end;

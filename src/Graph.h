@@ -464,8 +464,13 @@ vector<T> Graph<T>::bfs(const T & source) const {
     return res;
 }
 
-/*
- * BFS to search for the shortest path between two airports.
+/**
+ * @brief Finds the best flights between the given origin and destination by using BFS logic
+ * @details Time complexity: O(V+E⋅(L+A)), where V is the number of vertices in the graph, E is the number of edges in the graph, L represents the average length of the paths and A represents the maxAirlines
+ * @param source The origin airport vertex
+ * @param destination The destination airport vertex
+ * @param maxAirlines The maximum amount of different airlines that the user wants to allow
+ * @return A vector of vectors of flights, where each inner vector represents a possible flight path
  */
 template <class T>
 vector<vector<Connection<T>>> Graph<T>::findAllShortestPaths(Vertex<T> *source, Vertex<T> *destination, int maxAirlines) const {
@@ -521,7 +526,14 @@ vector<vector<Connection<T>>> Graph<T>::findAllShortestPaths(Vertex<T> *source, 
     return allPaths;
 }
 
-
+/**
+ * @brief Runs the modified BFS algorithm for each possible origin and destiny
+ * @details Time complexity: O(n*m), where n is the number of origins and m the number of destinies
+ * @param sources Al of the possible sources
+ * @param destinations All of the possible destinations
+ * @param maxAirlines The maximum amount of airlines in the flight connections
+ * @return A vector of vectors of flights, where each inner vector represents a possible flight path
+ */
 template <class T>
 vector<vector<Connection<T>>> Graph<T>::multiBfs(vector<T> sources, vector<T> destinations, int maxAirlines) const {
     vector<vector<Connection<T>>> allPaths;
