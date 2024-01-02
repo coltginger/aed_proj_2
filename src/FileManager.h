@@ -4,7 +4,10 @@ using namespace std;
 #ifndef AED_PROJ_2_FILEMANAGER_H
 #define AED_PROJ_2_FILEMANAGER_H
 
-
+/**
+ * @brief Class that handles data parsing for the airport data
+ * Has the collection of airlines, airports and flights
+ */
 class FileManager {
 private:
     vector<string> _airportsfile;

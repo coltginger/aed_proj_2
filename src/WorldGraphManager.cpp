@@ -7,12 +7,21 @@
 
 using namespace std;
 
+/**
+ * @brief Default constructor for the WorldGraphManager class
+ * Initializes the WorldGraphManager by creating airports, airlines, and flights
+ * @details Time complexity O(n) where n is the maximum size of the airports, airlines, and flights files
+ */
 WorldGraphManager::WorldGraphManager() {
     makeAirports();
     makeAirlines();
     makeFlights();
 }
 
+/**
+ * @brief Creates airports from the airports file
+ * @details Time complexity O(n) where n is the size of the airports file
+ */
 void WorldGraphManager::makeAirports() {
     vector<Airport> res;
     auto filevector = _vectors.getAirportsFile();
@@ -28,6 +37,10 @@ void WorldGraphManager::makeAirports() {
     }
 }
 
+/**
+ * @brief Creates airlines from the airlines file
+ * @details Time complexity O(n) where n is the size of the airports file
+ */
 void WorldGraphManager::makeAirlines() {
     vector<Airline> res;
     auto filevector = _vectors.getAirlinesFile();
@@ -41,6 +54,10 @@ void WorldGraphManager::makeAirlines() {
     }
 }
 
+/**
+ * @brief Creates flights from the flights file
+ * @details Time complexity O(n) where n is the size of the airports file
+ */
 void WorldGraphManager::makeFlights() {
     vector<Flight> res;
     auto filevector = _vectors.getFlightsFile();
@@ -54,6 +71,10 @@ void WorldGraphManager::makeFlights() {
     addFlights();
 }
 
+/**
+ * @brief Adds flights to the world graph
+ * @details Time complexity O(n) where n is the number of flights
+ */
 void WorldGraphManager::addFlights() {
     for(int i = 0; i<_flights.size(); i++){
         Vertex<Airport>* source = airportFinder(_flights[i].getSource());
@@ -66,11 +87,21 @@ void WorldGraphManager::addFlights() {
     }
 }
 
+/**
+ * @brief Returns the number of airports in the world graph
+ * @details Time complexity O(1)
+ * @return value that corresponds to the number of airports in the world graph
+ */
 int WorldGraphManager::numberOfAirports() {
     int res = _world.getNumVertex();
     return res;
 }
 
+/**
+ * @brief Returns the number of flights in the world graph
+ * @details Time complexity O(n) where n is the number of airports
+ * @return value that corresponds to the number of airports in the world graph
+ */
 int WorldGraphManager::numberOfFlights() {
     int res = 0;
     for (auto i: _world.getVertexSet()){
@@ -81,6 +112,12 @@ int WorldGraphManager::numberOfFlights() {
     return res;
 }
 
+/**
+ * @brief Returns the number of flights and airlines in a given airport
+ * @details Time complexity O(n) where n is the number of flights in the airport
+ * @param source The airport code
+ * @return A pair where the first element is the number of flights and the second element is the number of airlines
+ */
 pair<int, int> WorldGraphManager::numberOfFlightsInAirport(std::string source) {
     pair<int, int> res;
     int res1 = 0;
@@ -99,6 +136,11 @@ pair<int, int> WorldGraphManager::numberOfFlightsInAirport(std::string source) {
     return res;
 }
 
+/**
+ * @brief Returns the number of flights per city
+ * @details Time complexity O(n^2) where n is the number of airports
+ * @return A vector of pairs where each pair contains a city name and the number of flights from that city
+ */
 vector<pair<string, int>> WorldGraphManager::numberOfFlightsPerCity() {
     vector<pair<string, int>> res;
     for (auto v : _world.getVertexSet()) {
@@ -137,6 +179,11 @@ vector<pair<string, int>> WorldGraphManager::numberOfFlightsPerCity() {
     return res;
 }
 
+/**
+ * @brief Returns the number of flights per airline
+ * @details Time complexity O(n) where n is the number of flights
+ * @return A vector of pairs where each pair contains an airline name and the number of flights by that airline
+ */
 vector<pair<string, int>> WorldGraphManager::numberOfFlightsPerAirline() {
     vector<pair<string, int>> res;
     for (auto f : _flights){
@@ -157,7 +204,13 @@ vector<pair<string, int>> WorldGraphManager::numberOfFlightsPerAirline() {
     return res;
 }
 
-int WorldGraphManager::numberOfCountriesAirpoart(std::string source) {
+/**
+ * @brief Returns the number of countries an airport has flights to
+ * @details Time complexity O(n) where n is the number of flights from the airport
+ * @param source The airport code
+ * @return The number of countries the airport has flights to
+ */
+int WorldGraphManager::numberOfCountriesAirport(std::string source) {
     int res;
     vector<string> checked;
     auto v = airportFinder(source);
@@ -172,6 +225,12 @@ int WorldGraphManager::numberOfCountriesAirpoart(std::string source) {
     return res;
 }
 
+/**
+ * @brief Returns the number of countries a city has flights to
+ * @details Time complexity O(n^2) where n is the number of airports
+ * @param source The city name
+ * @return The number of countries the city has flights to
+ */
 int WorldGraphManager::numberOfCountriesCity(std::string source) {
     int res;
     vector<string> checked;
@@ -190,6 +249,12 @@ int WorldGraphManager::numberOfCountriesCity(std::string source) {
     return res;
 }
 
+/**
+ * @brief Returns the number of airports an airport has flights to
+ * @details Time complexity O(n) where n is the number of flights from the airport
+ * @param source The airport code
+ * @return The number of airports the airport has flights to
+ */
 int WorldGraphManager::numberOfAirportsAirport(std::string source) {
     int res;
     vector<string> checked;
@@ -205,6 +270,12 @@ int WorldGraphManager::numberOfAirportsAirport(std::string source) {
     return res;
 }
 
+/**
+ * @brief Returns the number of cities an airport has flights to
+ * @details Time complexity O(n) where n is the number of flights from the airport
+ * @param source The airport code
+ * @return The number of cities the airport has flights to
+ */
 int WorldGraphManager::numberOfCitiesAirport(std::string source) {
     int res;
     vector<string> checked;
@@ -221,6 +292,13 @@ int WorldGraphManager::numberOfCitiesAirport(std::string source) {
 
 }
 
+/**
+ * @brief Returns the number of airports within a certain distance from a given airport
+ * @details Time complexity O(n) where n is the number of airports
+ * @param source The airport code
+ * @param distance The distance in kilometers
+ * @return The number of airports within the given distance
+ */
 int WorldGraphManager::numberOfAirportsAtX(std::string source, int distance) {
     for (auto i : _world.getVertexSet()) i->setVisited(false);
     vector<Airport> res;
@@ -254,6 +332,11 @@ vector<pair<Airport, Airport>> WorldGraphManager::findLongestTrips() {
     return res;
 }
 
+/**
+ * @brief Returns the airport with the most flights
+ * @details Time complexity O(n^2), where n is the number of airports
+ * @return The airport with the most flights
+ */
 Airport WorldGraphManager::findTopKAirport() {
     vector<pair<int, Airport>> vector;
     for(auto i : _world.getVertexSet()){
@@ -287,7 +370,12 @@ Airport WorldGraphManager::findTopKAirport() {
     return vector[0].second;
 }
 
-
+/**
+ * @brief Returns the vertex corresponding to a given airport code
+ * @details Time complexity O(n) where n is the number of airports
+ * @param code The airport code
+ * @return The vertex corresponding to the given airport code
+ */
 Vertex<Airport>* WorldGraphManager::airportFinder(std::string code) {
     string newsource;
     for(auto i : _world.getVertexSet())

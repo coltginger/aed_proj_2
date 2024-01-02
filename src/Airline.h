@@ -3,7 +3,9 @@ using namespace std;
 #ifndef AED_PROJ_2_AIRLINE_H
 #define AED_PROJ_2_AIRLINE_H
 
-
+/**
+ * @brief Class to store information about a certain Airline, including its code, name, callsign and country
+ */
 class Airline {
 private:
     string _code;

@@ -6,6 +6,10 @@
 
 using namespace std;
 
+/**
+ * @brief Prints and selects the options the World Graph Manager offers after calling all functions needed
+ * @details Time complexity is user dependent, but the while loop occurs until option 8 is selected
+ */
 void App::run() {
     bool STOP = true;
 
@@ -79,7 +83,7 @@ void App::run() {
                     case 1:
                         cout << endl << "Input the airport's code (in capital letters): ";
                         cin >> source;
-                        a = _worldGraph.numberOfCountriesAirpoart(source);
+                        a = _worldGraph.numberOfCountriesAirport(source);
                         cout << endl << "The airport goes to " << a << " different countries.";
                         break;
                     case 2:
